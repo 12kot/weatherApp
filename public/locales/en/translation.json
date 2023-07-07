@@ -1,3 +1,13 @@
 {
-    "header": "Hi"
+  "header": {
+    "about": "About",
+    "weather": "Weather",
+    "search": "Search",
+    "lng": "Language",
+    "default_lng": "OS language",
+    "choose_theme": "Theme",
+    "default_theme": "OS default",
+    "dark_theme": "Dark",
+    "light_theme": "Light"
+  }
 }

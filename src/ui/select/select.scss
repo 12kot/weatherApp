@@ -1,0 +1,169 @@
+/* radio settings 👇 */
+
+.theme-popup {
+  /* total */
+  --total_font_family: Menlo, Roboto Mono, monospace;
+  /* button */
+  --btn_padding: 0.5em;
+  --btn_height: 2em;
+  --btn_border_radius: 0.3125em;
+  --btn_outline_width: 0.0625em;
+  --btn_outline_color: #a0a0a0;
+  --btn_outline_offset: 0.0625em;
+  --btn_gap: 0.3125em;
+  /* list */
+  --list_padding: 0.5em;
+  --list_bg: var(--select_btn_bg);
+  --list_border_radius: var(--btn_border_radius);
+  --list_gap: 0.1875em;
+  --list_btn_active: #b9b9b970;
+  --list_btn_border_radius: 0.25em;
+  --list_btn_padding: 0.35em 1em;
+  --list_btn_gap: 0.4375em;
+  --list_btn_outline_width: 0.0625em;
+  --list_btn_outline_color: rgb(212, 210, 210);
+  --list_offset: 0.35em;
+  --list_position_left: unset;
+  --list_position_right: 0;
+  /* 👆 if you want to change sides just switch one property */
+  /* from properties to "unset" and the other to 0 */
+}
+
+.theme-popup__button .theme-popup__icons svg,
+#light,
+#ru,
+#en,
+#dark,
+#default,
+#system,
+#lng,
+#theme,
+.theme-popup__list-container {
+  display: none;
+}
+
+.theme-popup {
+  color: var(--select_total_text_color);
+  font-family: var(--total_font_family);
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+.theme-popup__list-container {
+  position: absolute;
+  left: var(--list_position_left);
+  right: var(--list_position_right);
+  top: calc(var(--btn_height) + var(--list_offset));
+
+}
+
+.theme-popup__icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.theme-popup__button {
+  line-height: var(--btn_height);
+  background-color: var(--select_btn_bg);
+  padding: 0 var(--btn_padding);
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-column-gap: var(--btn_gap);
+  -moz-column-gap: var(--btn_gap);
+  column-gap: var(--btn_gap);
+  border-radius: var(--btn_border_radius);
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  outline: none;
+  font-weight: bold;
+  transition: var(--transition-default);
+}
+
+.theme-popup__list {
+  margin: 0;
+  list-style-type: none;
+  padding: var(--list_padding);
+  border-radius: var(--list_border_radius);
+  background-color: var(--list_bg);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  row-gap: var(--list_gap);
+}
+
+.theme-popup__list label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: start;
+  -webkit-column-gap: var(--list_btn_gap);
+  -moz-column-gap: var(--list_btn_gap);
+  column-gap: var(--list_btn_gap);
+  padding: var(--list_btn_padding);
+  border-radius: var(--list_btn_border_radius);
+  white-space: nowrap;
+  transition: var(--transition-default);
+}
+
+.theme-popup__list label span {
+  font-size: var(--font-size-default);
+}
+
+/* actions */
+
+#lng:checked ~ .theme-popup__button {
+  outline: var(--btn_outline_width) solid var(--btn_outline_color);
+  outline-offset: var(--btn_outline_offset);
+}
+
+#lng:checked ~ .theme-popup__list-container {
+  display: block;
+}
+
+.theme-popup__list label:hover,
+.theme-popup__button:hover,
+#lng:checked ~ .theme-popup__button {
+  background-color: var(--select_btn_hover_bg);
+}
+
+#theme:checked ~ .theme-popup__button {
+  outline: var(--btn_outline_width) solid var(--btn_outline_color);
+  outline-offset: var(--btn_outline_offset);
+}
+
+#theme:checked ~ .theme-popup__list-container {
+  display: block;
+}
+
+.theme-popup__list label:hover,
+.theme-popup__button:hover,
+#theme:checked ~ .theme-popup__button {
+  background-color: var(--select_btn_hover_bg);
+}

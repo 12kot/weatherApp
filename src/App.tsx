@@ -1,26 +1,28 @@
-import React, {useEffect} from 'react';
-import './App.css';
+import React, { ReactElement, useEffect } from "react";
+import styles from "./App.module.scss";
+import Header from "components/header/header";
+import CurrentDay from "components/currentDay/currentDay";
 import { useTranslation } from "react-i18next";
+import Search from "components/search/search";
+import About from "components/about/about";
 
-const App = () => {
-  const { t, i18n } = useTranslation();
+const App = (): ReactElement => {
+  const { i18n } = useTranslation();
 
   useEffect(() => {
-    if (!localStorage.getItem("i18nextLng"))
-      i18n.changeLanguage(navigator.language);
-  }, [])
-
-  const ch = (str: string) => {
-    i18n.changeLanguage(str);
-  }
+    //i18n.changeLanguage(navigator.language);
+  }, [i18n]);
 
   return (
-    <div>
-      {t("header")}
-      <button onClick={() => ch("ru")}>RU</button>
-      <button onClick={() => ch("en")}>EN</button>
-    </div>
+    <>
+      <Header />
+      <div className={styles.container}>
+        <CurrentDay />
+        <Search />
+        <About />
+      </div>
+    </>
   );
-}
+};
 
 export default App;

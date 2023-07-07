@@ -1,0 +1,37 @@
+:root {
+  --font-color-default: #202124;
+  --font-size-default: 17px;
+  --background-default: #fff;
+  --header-color-default: #fff;
+  --line-height-default: 1.4em;
+  --header-heigth-default: 65px;
+  --transition-default: 0.3s;
+  --border-bottom-default: #eee;
+  --header-logo-size: 24px;
+  --page-margin: 8vw;
+  --padding-default: 18px;
+  --border-radius: 8px;
+
+  --select_total_text_color: #202124;
+  --select_btn_hover_bg: #d3d3d3;
+  --select_btn_bg: #f5f5f5;
+  
+  @media screen and (min-width: 767px) and (max-width: 1023px) {
+    --font-size-default: 15px;
+  }
+  @media screen and (max-width: 767px) {
+    --page-margin: 12px;
+    --font-size-default: 14px;
+  }
+}
+
+[dark] {
+  --background-default: #202124;
+  --font-color-default: #fff;
+  --header-color-default: #202124;
+  --border-bottom-default: #333;
+
+  --select_total_text_color: #e0e0e0;
+  --select_btn_hover_bg: #5a5656;
+  --select_btn_bg: #3a3a3a;
+}

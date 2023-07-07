@@ -1,0 +1,31 @@
+* {
+  outline: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+div {
+  display: block;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: var(--font-size-default);
+  color: var(--font-color-default);
+  line-height: var(--line-height-default);
+  margin: 0;
+  background-color: var(--background-default);
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+  min-width: 375px;
+  transition: var(--transition-default);
+}  
+
+a {
+  outline: none;
+  text-decoration: none;
+  color: var(--font-color-default);
+  transition: var(--transition-default);
+}

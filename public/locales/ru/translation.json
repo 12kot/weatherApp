@@ -1,3 +1,13 @@
 {
-    "header": "Привет"
+  "header": {
+    "about": "О нас",
+    "weather": "Погода",
+    "search": "Поиск",
+    "lng": "Язык",
+    "default_lng": "Системный",
+    "choose_theme": "Тема",
+    "default_theme": "Системная",
+    "dark_theme": "Тёмная",
+    "light_theme": "Светлая"
+  }
 }
