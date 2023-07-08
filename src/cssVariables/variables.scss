@@ -1,27 +1,50 @@
 :root {
   --font-color-default: #202124;
-  --font-size-default: 17px;
   --background-default: #fff;
   --header-color-default: #fff;
-  --line-height-default: 1.4em;
+  --border-bottom-default: #eee;
+
+  --font-size-default: 15px;
+  --header-logo-size: 24px;
   --header-heigth-default: 65px;
   --transition-default: 0.3s;
-  --border-bottom-default: #eee;
-  --header-logo-size: 24px;
-  --page-margin: 8vw;
+  --page-margin-bottom: 5.5vw;
+  --page-margin-left: 6vw;
   --padding-default: 18px;
   --border-radius: 8px;
+
+  --current-day-block-heigth: 7rem;
+  --current-day-font-city: 2.8rem;
+  --current-day-font-day: 0.9rem;
+  --current-day-img-size: 48px;
 
   --select_total_text_color: #202124;
   --select_btn_hover_bg: #d3d3d3;
   --select_btn_bg: #f5f5f5;
-  
+
   @media screen and (min-width: 767px) and (max-width: 1023px) {
-    --font-size-default: 15px;
+    --font-size-default: 13px;
+    --header-logo-size: 20px;
+
+    --page-margin-left: 12px;
+    --page-margin-bottom: 24px;
+
+    --current-day-block-heigth: 80px;
+    --current-day-font-city: 32px;
+    --current-day-font-day: 16px;
+    --current-day-img-size: 40px;
   }
   @media screen and (max-width: 767px) {
-    --page-margin: 12px;
-    --font-size-default: 14px;
+    --font-size-default: 12px;
+    --header-logo-size: 16px;
+
+    --page-margin-left: 12px;
+    --page-margin-bottom: 24px;
+
+    --current-day-block-heigth: 32px;
+    --current-day-font-city: 12px;
+    --current-day-font-day: 11px;
+    --current-day-img-size: 16px;
   }
 }
 

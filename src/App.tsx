@@ -2,16 +2,17 @@ import React, { ReactElement, useEffect } from "react";
 import styles from "./App.module.scss";
 import Header from "components/header/header";
 import CurrentDay from "components/currentDay/currentDay";
-import { useTranslation } from "react-i18next";
 import Search from "components/search/search";
 import About from "components/about/about";
+import { useAppDispatch } from "hooks/hooks";
+import { getUserIP } from "store/slices/appSlice";
 
 const App = (): ReactElement => {
-  const { i18n } = useTranslation();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    //i18n.changeLanguage(navigator.language);
-  }, [i18n]);
+    dispatch(getUserIP());
+  }, [dispatch]);
 
   return (
     <>

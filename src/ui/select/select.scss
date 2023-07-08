@@ -2,7 +2,6 @@
 
 .theme-popup {
   /* total */
-  --total_font_family: Menlo, Roboto Mono, monospace;
   /* button */
   --btn_padding: 0.5em;
   --btn_height: 2em;
@@ -44,7 +43,6 @@
 
 .theme-popup {
   color: var(--select_total_text_color);
-  font-family: var(--total_font_family);
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -58,7 +56,6 @@
   left: var(--list_position_left);
   right: var(--list_position_right);
   top: calc(var(--btn_height) + var(--list_offset));
-
 }
 
 .theme-popup__icons {

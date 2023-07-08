@@ -1,8 +1,16 @@
+@font-face {
+  font-family: "Unbounded Regular";
+  src: url("../public/fonts/UnboundedRegular.ttf");
+}
+
 * {
   outline: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   scroll-behavior: smooth;
+
+  font-family: "Unbounded Regular";
+  transition: var(--transition-default);
 }
 
 div {
@@ -14,18 +22,31 @@ body {
   font-weight: 400;
   font-size: var(--font-size-default);
   color: var(--font-color-default);
-  line-height: var(--line-height-default);
+  line-height: normal;
   margin: 0;
   background-color: var(--background-default);
   width: 100%;
   -webkit-font-smoothing: antialiased;
   min-width: 375px;
-  transition: var(--transition-default);
-}  
+}
 
 a {
-  outline: none;
   text-decoration: none;
   color: var(--font-color-default);
   transition: var(--transition-default);
+
+  &:focus {
+    outline: 2px solid black;
+  }
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+  margin: 0;
 }
