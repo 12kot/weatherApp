@@ -29,7 +29,7 @@ const Select = (props: Props): ReactElement => {
 
   const getSVG = (value: string): ReactElement => {
     const input = props.inputs.find((input) => input.id === value);
-    if (input?.svg) return input.svg();
+    if (input?.svg) return <span className="wh">{input.svg()}</span>;
     return <></>; //сюда добавить что-то при ошибке
   };
 
@@ -37,7 +37,7 @@ const Select = (props: Props): ReactElement => {
     return props.inputs.map((input) => (
       <li key={input.text}>
         <label htmlFor={input.id}>
-          <span className="theme-popup__icons">{input.svg()}</span>
+          <span className="theme-popup__icons wh">{input.svg()}</span>
           <span>{input.text}</span>
         </label>
       </li>

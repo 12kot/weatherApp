@@ -9,7 +9,6 @@
   -webkit-tap-highlight-color: transparent;
   scroll-behavior: smooth;
 
-  font-family: "Unbounded Regular";
 }
 
 div {
@@ -17,16 +16,13 @@ div {
 }
 
 body {
-  font-family: Inter, sans-serif;
-  font-weight: 400;
+  font-family: "Unbounded Regular";
   font-size: var(--font-size-default);
   color: var(--font-color-default);
   line-height: normal;
   margin: 0;
   background-color: var(--background-default);
   width: 100%;
-  -webkit-font-smoothing: antialiased;
-  min-width: 375px;
 }
 
 a {

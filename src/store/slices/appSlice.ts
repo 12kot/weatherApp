@@ -41,8 +41,14 @@ export const getUserIP = createAsyncThunk<
 
     dispatch(fetchWeather({ city: data.city }));
 
-    return { userIP: data.ip, userCity: data.city, userCountry: data.country };
-  } else return rejectWithValue("");
+    return {
+      userIP: data.ip,
+      userCity: data.city,
+      userCountry: data.country,
+    };
+  } else {
+    return rejectWithValue("");
+  }
 });
 
 export const fetchWeather = createAsyncThunk<
@@ -50,18 +56,31 @@ export const fetchWeather = createAsyncThunk<
   { city: string | null },
   { state: RootState }
 >("app/fetchWeather", async (props, { getState, rejectWithValue }) => {
-  const city =
-    props.city !== null ? props.city : getState().app.userInfo.userCity;
+  try {
+    const city =
+      props.city !== null ? props.city : getState().app.userInfo.userCity;
 
-  const response = await fetch(
-    `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${city}&aqi=yes`
-  );
+    let response = await fetch(
+      `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${city}&aqi=yes`
+    );
 
-  if (response.ok) {
-    const data: weatherType = await response.json();
+    if (!response.ok) {
+      const ip = getState().app.userInfo.userIP;
+      response = await fetch(
+        `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${ip}&aqi=yes`
+      );
+    }
 
-    return data;
-  } else return rejectWithValue("");
+    if (response.ok) {
+      const data: weatherType = await response.json();
+
+      return data;
+    } else {
+      return rejectWithValue("weather response");
+    }
+  } catch {
+    return rejectWithValue("weather catch");
+  }
 });
 
 const appSlice = createSlice({

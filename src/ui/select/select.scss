@@ -58,16 +58,16 @@
   top: calc(var(--btn_height) + var(--list_offset));
 }
 
-.theme-popup__icons {
+.wh {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  align-items: center;
   width: 16px;
   height: 16px;
 }
