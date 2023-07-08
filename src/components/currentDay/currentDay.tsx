@@ -1,11 +1,13 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import styles from "./currentDay.module.scss";
-import { useAppSelector } from "hooks/hooks";
+import { useAppDispatch, useAppSelector } from "hooks/hooks";
 import { useTranslation } from "react-i18next";
 import SunSVG from "ui/select/svg/sun";
+import { fetchWeather, getUserIP } from "store/slices/appSlice";
 
 const CurrentDay = (): ReactElement => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const { name, localtime } = useAppSelector(
     (state) => state.app.weather.location
   );
@@ -13,6 +15,10 @@ const CurrentDay = (): ReactElement => {
   const { text } = useAppSelector(
     (state) => state.app.weather.current.condition
   );
+
+  useEffect(() => {
+    dispatch(fetchWeather({ city: "Hrodna" }));
+  }, [dispatch]);
 
   const getDay = (day: number): string => {
     switch (day) {
@@ -28,7 +34,7 @@ const CurrentDay = (): ReactElement => {
         return t("days.friday");
       case 6:
         return t("days.saturday");
-      case 7:
+      case 0:
         return t("days.sunday");
       default:
         return "";
@@ -38,9 +44,9 @@ const CurrentDay = (): ReactElement => {
   const getDate = (): string => {
     const date = new Date(localtime);
 
-    return `${date.getHours()}:${
-      date.getMinutes() === 0 ? "00" : date.getMinutes()
-    } - ${getDay(+date.getDay())}, ${date.getDay()} 
+    return `${date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()}:${
+      date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
+    } - ${getDay(date.getDay())}, ${date.getDay()} 
     ${t(`months.${date.toLocaleString("en", { month: "short" })}`)} '${date
       .getFullYear()
       .toString()
