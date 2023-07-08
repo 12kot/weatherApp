@@ -1,0 +1,36 @@
+{
+  "header": {
+    "about": "About",
+    "weather": "Weather",
+    "search": "Search",
+    "lng": "Language",
+    "default_lng": "OS language",
+    "choose_theme": "Theme",
+    "default_theme": "OS default",
+    "dark_theme": "Dark",
+    "light_theme": "Light"
+  },
+  "days": {
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday"
+  },
+  "months": {
+    "Sep": "Sep",
+    "Oct": "Oct",
+    "Nov": "Nov",
+    "Dec": "Dec",
+    "Jan": "Jan",
+    "Feb": "Feb",
+    "Mar": "Mar",
+    "Apr": "Apr",
+    "May": "May",
+    "Jun": "Jun",
+    "Jul": "Jul",
+    "Aug": "Aug"
+  }
+}

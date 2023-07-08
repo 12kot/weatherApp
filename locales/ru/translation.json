@@ -1,0 +1,36 @@
+{
+  "header": {
+    "about": "О нас",
+    "weather": "Погода",
+    "search": "Поиск",
+    "lng": "Язык",
+    "default_lng": "Системный",
+    "choose_theme": "Тема",
+    "default_theme": "Системная",
+    "dark_theme": "Тёмная",
+    "light_theme": "Светлая"
+  },
+  "days": {
+    "monday": "Понедельник",
+    "tuesday": "Вторник",
+    "wednesday": "Среда",
+    "thursday": "Четверг",
+    "friday": "Пятница",
+    "saturday": "Суббота",
+    "sunday": "Воскресенье"
+  },
+  "months": {
+    "Sep": "Сен",
+    "Oct": "Окт",
+    "Nov": "Нояб",
+    "Dec": "Дек",
+    "Jan": "Янв",
+    "Feb": "Февр",
+    "Mar": "Март",
+    "Apr": "Апр",
+    "May": "Май",
+    "Jun": "Июнь",
+    "Jul": "Июль",
+    "Aug": "Авг"
+  }
+}
