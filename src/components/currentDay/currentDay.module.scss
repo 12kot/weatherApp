@@ -11,6 +11,7 @@
 @mixin media($max-width, $width) {
   @media screen and (max-width: $max-width) {
     width: $width;
+    max-width: $width;
   }
 }
 

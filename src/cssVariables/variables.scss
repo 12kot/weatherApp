@@ -39,23 +39,23 @@
   --select_btn_bg: #f5f5f5;
   
   @media screen and (min-width: 767px) and (max-width: 1023px) {
-    --header-logo-size: 22px;
-    --font-size-default: 14px;
+    --header-logo-size: 24px;
+    --font-size-default: 15px;
 
     --padding-default: 14px;
     
     --page-margin-left: 5vw;
     --page-margin-bottom: 22px;
     
-    --current-day-block-heigth: 48px;
-    --current-day-font-city: 22px;
-    --current-day-font-day: 14px;
+    --current-day-block-heigth: 36px;
+    --current-day-font-city: 24px;
+    --current-day-font-day: 15px;
 
-    --current-day-img-size: 32px;
+    --current-day-img-size: 36px;
   }
 
   @media screen and (max-width: 767px) {
-    --header-logo-size: 18px;
+    --header-logo-size: 20px;
     --font-size-default: 12px;
 
     --padding-default: 12px;
@@ -63,11 +63,11 @@
     --page-margin-left: 12px;
     --page-margin-bottom: 12px;
     
-    --current-day-block-heigth: 30px;
-    --current-day-font-city: 18px;
+    --current-day-block-heigth: 32px;
+    --current-day-font-city: 20px;
     --current-day-font-day: 12px;
 
-    --current-day-img-size: 28px;
+    --current-day-img-size: 32px;
   }
 
   @media screen and (max-width: 300px) {
