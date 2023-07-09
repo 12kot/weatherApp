@@ -1,0 +1,20 @@
+.input_box {
+  font-size: var(--font-size-default);
+
+  padding: 0 0 var(--input-padding-bottom);
+  border: none;
+  border-bottom: 2px solid var(--input-border-bottom);
+  width: 100%;
+  background-color: transparent;
+  transition: var(--transition-default);
+
+  &::placeholder {
+    color: var(--input-border-bottom);
+  }
+}
+
+.input_box:focus {
+  border-color: var(--input-border-bottom-active);
+  outline: none;
+}
+

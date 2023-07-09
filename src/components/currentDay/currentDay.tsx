@@ -1,18 +1,13 @@
 import React, { ReactElement } from "react";
 import styles from "./currentDay.module.scss";
-import { useAppSelector } from "hooks/hooks";
+
+import Input from "ui/input/input";
+import SearchSVG from "ui/svg/search";
+import Information from "./information/information";
 import { useTranslation } from "react-i18next";
-import SunSVG from "ui/select/svg/sun";
 
 const CurrentDay = (): ReactElement => {
   const { t } = useTranslation();
-  const { name, localtime } = useAppSelector(
-    (state) => state.app.weather.location
-  );
-  const { temp_c } = useAppSelector((state) => state.app.weather.current);
-  const { text } = useAppSelector(
-    (state) => state.app.weather.current.condition
-  );
 
   const getDay = (day: number): string => {
     switch (day) {
@@ -35,33 +30,40 @@ const CurrentDay = (): ReactElement => {
     }
   };
 
-  const getDate = (): string => {
-    const date = new Date(localtime);
+  const getDate = (time: string): string => {
+    const strTime = time.split(" ");
+    let newTime = strTime.join("T");
 
-    return `${date.getHours() < 10 ? `0${date.getHours()}` : date.getHours()}:${
-      date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
-    } - ${getDay(date.getDay())}, ${date.getDate()} 
-    ${t(`months.${date.toLocaleString("en", { month: "short" })}`)} '${date
-      .getFullYear()
-      .toString()
-      .slice(2)}`;
+    if (strTime[1]?.length === 4)
+      newTime = `${strTime[0]}T0${strTime[1]}`
+    
+    const date = new Date(newTime);
+    
+    const [hours, minutes, day, month, year] = [
+      date.getHours() < 10 ? `0${date.getHours()}` : date.getHours(),
+      date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes(),
+      date.getDate(),
+      t(`months.${date.toLocaleString("en", { month: "short" })}`),
+      date.getFullYear().toString().slice(2),
+    ];
+
+    return `${hours}:${minutes} - ${getDay(
+      date.getDay()
+    )}, ${day} ${month} '${year}`;
   };
 
   return (
     <div className={styles.container} id="currentDay">
-      <div className={styles.information}>
-        <p className={styles.celsius}>{temp_c}</p>
-        <div className={styles.block_info}>
-          <div className={styles.first}>
-            <p>{name}</p>
-            <p className={styles.block_item}>{getDate()}</p>
+      <Information getDate={getDate} />
+
+      <div className={styles.menu}>
+        <div className={styles.search}>
+          <div className={styles.search_btn}>
+            <SearchSVG />
           </div>
-          <div className={styles.second}>
-            <span className={styles.img}>
-              <SunSVG />
-            </span>
-            <p className={styles.block_item}>{text}</p>
-          </div>
+          <span className={styles.inp}>
+            <Input color={styles.color} />
+          </span>
         </div>
       </div>
     </div>

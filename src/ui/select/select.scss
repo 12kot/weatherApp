@@ -42,13 +42,12 @@
 }
 
 .theme-popup {
-  color: var(--select_total_text_color);
+  color: var(--font-color-default);
   position: relative;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-
 }
 
 .theme-popup__list-container {

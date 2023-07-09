@@ -1,0 +1,72 @@
+@import "../currentDay.module.scss";
+
+.information {
+  @extend .child1;
+
+  padding: var(--page-margin-bottom) 0 var(--page-margin-bottom)
+    var(--page-margin-left);
+
+  margin-top: auto;
+  align-items: center;
+
+  @extend .flex;
+
+  .celsius {
+    font-size: var(--current-day-block-heigth);
+    
+    &::after {
+      content: "\B0";
+    }
+  }
+  
+  .block_info {
+    width: 100%;
+    @extend .flex;
+
+    .block_item {
+      font-size: var(--current-day-font-day);
+      bottom: 0;
+    }
+
+    .first {
+      font-size: var(--current-day-font-city);
+      flex-direction: column;
+      justify-content: center;
+      margin-top: auto;
+      height: 100%;
+      
+      @extend .flex;
+
+      @include media(1023px, 85%);
+      @include media(767px, 65%);
+      @include media(300px, 55%);
+    }
+
+    .second {
+      width: 35%;
+      align-items: center;
+      text-align: center;
+
+      flex-direction: column;
+      @extend .flex;
+
+      .img {
+        margin-top: auto;
+  
+        height: var(--current-day-img-size);
+        width: var(--current-day-img-size);
+      }
+
+      @include media(1023px, 15%);
+      @include media(767px, 35%);
+      @include media(300px, 45%);
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    padding: var(--page-margin-bottom) var(--page-margin-left);
+
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

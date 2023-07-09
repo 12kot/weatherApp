@@ -4,80 +4,78 @@
   column-gap: var(--padding-default);
 }
 
+.color {
+  color: #fff;
+}
+
 @mixin media($max-width, $width) {
   @media screen and (max-width: $max-width) {
     width: $width;
   }
 }
 
+.parent {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr) 2fr;
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 12px;
+  grid-row-gap: 0px;
+}
+
+.child1 {
+  grid-area: 1 / 1 / 6 / 6;
+
+  @media screen and (max-width: 1170px) {
+    grid-area: 1 / 1 / 6 / 8;
+  }
+}
+.child2 {
+  grid-area: 1 / 6 / 6 / 8;
+}
+
 .container {
-  background: url("../../../public/common/background.jpg") no-repeat;
+  @extend .parent;
+
+  background: var(--background-img);
   background-size: cover;
   height: 100vh;
   color: #fff;
 
-  padding: var(--page-margin-bottom) var(--page-margin-left);
   transition: var(--transition-default);
 
-  @extend .flex;
+  .menu {
+    @extend .child2;
+    z-index: 200;
 
-  .information {
-    width: 90%;
-    margin-top: auto;
-    align-items: center;
+    background: var(--menu-background);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-left: 1px solid var(--menu-border);
 
-    @extend .flex;
+    padding: 64px 48px 32px;
 
-    .celsius {
-      font-size: var(--current-day-block-heigth);
-
-      &::after {
-        content: "\B0";
-      }
-    }
-
-    .block_info {
-      width: 100%;
+    .search {
       @extend .flex;
 
-      .img {
-        //position: absolute;
-        margin-top: auto;
-
-        height: var(--current-day-img-size);
-        width: var(--current-day-img-size);
+      .inp {
+        width: 75%;
       }
 
-      .block_item {
-        font-size: var(--current-day-font-day);
-        margin-top: auto;
-      }
+      .search_btn {
+        position: absolute;
+        padding: 24px;
 
-      .first {
-        font-size: var(--current-day-font-city);
-        flex-direction: column;
-        @extend .flex;
+        right: 0;
+        top: 0;
+        height: calc(70px + var(--font-size-default) + var(--input-padding-bottom));
+        width: calc(70px + var(--font-size-default) + var(--input-padding-bottom));
 
-        @include media(1023px, 70%);
-        @include media(300px, 55%);
-      }
-      
-      .second {
-        width: 30%;
-        align-items: center;
-        
-        flex-direction: column;
-        @extend .flex;
-        
-        @include media(1023px, 30%);
-        @include media(300px, 45%);
+        background-color: var(--menu-search-btn);
       }
     }
 
-    @media screen and (max-width: 1023px) {
-      width: 100%;
-      flex-direction: column;
-      align-items: flex-start;
+    @media screen and (max-width: 1170px) {
+      display: none;
     }
   }
 }

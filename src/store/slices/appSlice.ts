@@ -29,7 +29,7 @@ export const getUserIP = createAsyncThunk<
   },
   void,
   { state: RootState }
->("app/getUserIP", async (_, { rejectWithValue, dispatch }) => {
+  >("app/getUserIP", async (_, { rejectWithValue, dispatch }) => {
   const response = await fetch(
     `https://ipinfo.io/json?token=${process.env.REACT_APP_GET_USER_CITY_BY_IP_IPINFO}`,
     {

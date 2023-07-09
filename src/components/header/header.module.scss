@@ -6,6 +6,7 @@
 }
 
 .container {
+  z-index: 100;
   transition: var(--transition-default);
 
   width: 100%;
@@ -49,6 +50,7 @@
 }
 
 .active {
+  z-index: 4000;
   background-color: var(--header-color-default);
   border-bottom: 1px solid var(--border-bottom-default);
   color: var(--font-color-default);

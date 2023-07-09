@@ -8,7 +8,7 @@
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
   scroll-behavior: smooth;
-
+  font-family: "Unbounded Regular";
 }
 
 div {
@@ -16,13 +16,14 @@ div {
 }
 
 body {
-  font-family: "Unbounded Regular";
   font-size: var(--font-size-default);
   color: var(--font-color-default);
   line-height: normal;
   margin: 0;
   background-color: var(--background-default);
   width: 100%;
+
+  word-wrap: break-word;
 }
 
 a {
