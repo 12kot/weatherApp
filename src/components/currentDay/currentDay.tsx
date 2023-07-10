@@ -1,10 +1,9 @@
 import React, { ReactElement } from "react";
 import styles from "./currentDay.module.scss";
 
-import Input from "ui/input/input";
-import SearchSVG from "ui/svg/search";
 import Information from "./information/information";
 import { useTranslation } from "react-i18next";
+import Menu from "./menu/menu";
 
 const CurrentDay = (): ReactElement => {
   const { t } = useTranslation();
@@ -56,16 +55,7 @@ const CurrentDay = (): ReactElement => {
     <div className={styles.container} id="currentDay">
       <Information getDate={getDate} />
 
-      <div className={styles.menu}>
-        <div className={styles.search}>
-          <div className={styles.search_btn}>
-            <SearchSVG />
-          </div>
-          <span className={styles.inp}>
-            <Input color={styles.color} />
-          </span>
-        </div>
-      </div>
+      <Menu />
     </div>
   );
 };

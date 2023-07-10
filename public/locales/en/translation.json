@@ -34,5 +34,17 @@
     "Aug": "Aug"
   },
 
-  "menu": { "another_location": "Another location" }
+  "menu": {
+    "another_location": "Another location",
+    "weather_details": "Weather Details",
+    "cloudy": "Cloudy",
+    "humidity": "Humidity",
+    "wind": "Weather Details",
+    "rain": "Rain"
+  },
+
+  "weather": {
+    "km/h": "km/h",
+    "mm": "mm"
+  }
 }

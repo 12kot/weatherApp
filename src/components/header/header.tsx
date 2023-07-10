@@ -9,9 +9,15 @@ import SystemSVG from "ui/svg/system";
 import LngSVG from "ui/svg/lng";
 
 import { themeType } from "types/types";
+import { useAppDispatch, useAppSelector } from "hooks/hooks";
+import { menuHandler } from "store/slices/appSlice";
+import MenuSVG from "ui/svg/menu";
 
 const Header = (): ReactElement => {
   const { t, i18n } = useTranslation();
+  const dispatch = useAppDispatch();
+  const menuActive = useAppSelector((state) => state.app.menuActive);
+
   const [head, setHead] = useState<boolean>(false);
   const [menu, setMenu] = useState<boolean>(window.innerWidth < 1170);
   const [theme, setTheme] = useState<themeType>(
@@ -42,32 +48,47 @@ const Header = (): ReactElement => {
 
   useEffect(() => {
     window.addEventListener("scroll", function () {
-      if (window.scrollY >= 65) setHead(true);
+      if (window.scrollY >= 65 && !menuActive) setHead(true);
       else setHead(false);
     });
 
     window.addEventListener("resize", function () {
       if (window.innerWidth < 1170) setMenu(true);
-      else setMenu(false);
+      else {
+        document.body.removeAttribute("no_scroll");
+        setMenu(false)
+      };
     });
-  }, []);
+  }, [menuActive]);
+
+  const handleMenu = () => {
+    if (!menuActive) setHead(false);
+    else if (window.scrollY >= 65) setHead(true);
+
+    if (!menuActive) document.body.setAttribute("no_scroll", "");
+    else document.body.removeAttribute("no_scroll");
+
+    dispatch(menuHandler(!menuActive));
+  };
 
   return (
     <header className={`${styles.container} ${head && styles.active}`}>
       <p className={styles.logo}>LOGO</p>
-      <span className={styles.page}>
-        <a href="#currentDay" className={styles.item}>
-          {t("header.weather")}
-        </a>
-        <a href="#search" className={styles.item}>
-          {t("header.search")}
-        </a>
-        <a href="#about" className={styles.item}>
-          {t("header.about")}
-        </a>
-      </span>
+      {!menuActive && (
+        <span className={styles.page}>
+          <a href="#currentDay" className={styles.item}>
+            {t("header.weather")}
+          </a>
+          <a href="#search" className={styles.item}>
+            {t("header.search")}
+          </a>
+          <a href="#about" className={styles.item}>
+            {t("header.about")}
+          </a>
+        </span>
+      )}
 
-      {(head || menu) && (
+      {(head || menu) && !menuActive && (
         <span className={styles.choose}>
           <Select
             id="lng"
@@ -92,6 +113,15 @@ const Header = (): ReactElement => {
             value={theme}
             setValue={setTheme}
           />
+        </span>
+      )}
+
+      {menu && (
+        <span
+          className={`${styles.menu} ${menuActive && styles.m_active}`}
+          onClick={handleMenu}
+        >
+          <MenuSVG />
         </span>
       )}
     </header>

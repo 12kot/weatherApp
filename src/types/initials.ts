@@ -1,10 +1,14 @@
-export const initialUser = {
-    userIP: "178.168.186.222",
-    userCity: "Hrodna",
-    userCountry: "BY"
-}
+import { userInfoType, weatherType } from "./types";
 
-export const initialWeather = {
+export const initialUser: userInfoType = {
+  userIP: "178.168.186.222",
+  userCity: "Hrodna",
+  userCountry: "BY",
+  regionId: 628035,
+  citiesNearby: [],
+};
+
+export const initialWeather: weatherType = {
   location: {
     name: "",
     region: "",

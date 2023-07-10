@@ -57,9 +57,6 @@
       @extend .flex;
 
       .img {
-        display: block;
-        margin-top: auto;
-
         height: var(--current-day-img-size);
         width: var(--current-day-img-size);
       }

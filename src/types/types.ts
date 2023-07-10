@@ -1,5 +1,22 @@
 export type themeType = "dark" | "system" | "light";
 
+export interface appType {
+  userInfo: userInfoType;
+  weather: {
+    currentWeather: weatherType;
+    searchList: string[];
+  };
+  menuActive: boolean;
+}
+
+export interface userInfoType {
+  userIP: string;
+  userCity: string;
+  userCountry: string;
+  regionId: number;
+  citiesNearby: string[];
+}
+
 export interface weatherType {
   location: {
     name: string;
@@ -19,7 +36,7 @@ export interface weatherType {
     is_day: number;
     condition: {
       text: string;
-        icon: string;
+      icon: string;
       code: number;
     };
     wind_mph: number;
@@ -50,3 +67,12 @@ export interface weatherType {
   };
 }
 
+export interface searchType {
+  id: number;
+  name: string;
+  region: string;
+  country: string;
+  lat: number;
+  lon: number;
+  url: string;
+}

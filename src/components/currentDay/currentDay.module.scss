@@ -32,6 +32,10 @@
 }
 .child2 {
   grid-area: 1 / 6 / 6 / 8;
+  
+  @media screen and (max-width: 1170px) {
+    grid-area: 1 / 1 / 6 / 8;
+  }
 }
 
 .container {
@@ -43,40 +47,4 @@
   color: #fff;
 
   transition: var(--transition-default);
-
-  .menu {
-    @extend .child2;
-    z-index: 200;
-
-    background: var(--menu-background);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-left: 1px solid var(--menu-border);
-
-    padding: 64px 48px 32px;
-
-    .search {
-      @extend .flex;
-
-      .inp {
-        width: 75%;
-      }
-
-      .search_btn {
-        position: absolute;
-        padding: 24px;
-
-        right: 0;
-        top: 0;
-        height: calc(70px + var(--font-size-default) + var(--input-padding-bottom));
-        width: calc(70px + var(--font-size-default) + var(--input-padding-bottom));
-
-        background-color: var(--menu-search-btn);
-      }
-    }
-
-    @media screen and (max-width: 1170px) {
-      display: none;
-    }
-  }
 }

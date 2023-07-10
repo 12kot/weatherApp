@@ -7,11 +7,11 @@ const Information = (props: {
   getDate: (time: string) => string;
 }): ReactElement => {
   const { name, localtime } = useAppSelector(
-    (state) => state.app.weather.location
+    (state) => state.app.weather.currentWeather.location
   );
-  const { temp_c } = useAppSelector((state) => state.app.weather.current);
+  const { temp_c } = useAppSelector((state) => state.app.weather.currentWeather.current);
   const { text } = useAppSelector(
-    (state) => state.app.weather.current.condition
+    (state) => state.app.weather.currentWeather.current.condition
   );
 
   return (
@@ -23,9 +23,9 @@ const Information = (props: {
           <p className={styles.block_item}>{props.getDate(localtime)}</p>
         </div>
         <div className={styles.second}>
-          <span className={styles.img}>
+           <span className={styles.img}>
             <SunColorSVG />
-          </span>
+          </span> 
           <p className={styles.block_item}>{text}</p>
         </div>
       </div>

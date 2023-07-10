@@ -6,7 +6,7 @@
 }
 
 .container {
-  z-index: 100;
+  z-index: 300;
   transition: var(--transition-default);
 
   width: 100%;
@@ -47,6 +47,15 @@
     margin-left: auto;
     @extend .flex;
   }
+
+  .menu {
+    width: calc(var(--font-size-default) * 2);
+
+  }
+  
+  .m_active {
+    margin-left: auto;
+  }
 }
 
 .active {
@@ -59,7 +68,11 @@
     color: var(--font-color-default);
 
     &:hover {
-      background-color: var(--select_btn_bg);
+      background-color: var(--focus-color);
     }
+  }
+
+  .menu {
+    color: var(--font-color-default);
   }
 }
