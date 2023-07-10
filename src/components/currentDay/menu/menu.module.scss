@@ -14,7 +14,7 @@
   -webkit-backdrop-filter: blur(10px);
   border-left: 1px solid var(--menu-border);
 
-  padding: 64px 48px 32px;
+  padding: 65px 48px 32px;
 
   transition: var(--transition-default);
   justify-content: space-between;
@@ -27,6 +27,10 @@
 
     .inp {
       width: 75%;
+    }
+
+    .loading {
+      opacity: 0.6;
     }
 
     .search_btn {
@@ -42,6 +46,8 @@
         70px + var(--font-size-default) + var(--input-padding-bottom)
       );
 
+      border: 0;
+      color: #fff;
       background-color: var(--menu-search-btn);
     }
   }
@@ -98,8 +104,6 @@
       max-height: 100%;
       overflow-y: scroll;
 
-      padding: var(--menu-padding) 0 0;
-
       flex-direction: column;
       @extend .flex;
 
@@ -133,6 +137,8 @@
   }
 
   @media screen and (max-width: 1170px) {
+    padding: 65px calc(var(--page-margin-left) + 10px) 32px;
+
     transform: translateX(100%);
     position: fixed;
     height: 100%;

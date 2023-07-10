@@ -6,7 +6,7 @@
 }
 
 .container {
-  z-index: 300;
+  z-index: 100;
   transition: var(--transition-default);
 
   width: 100%;
@@ -50,10 +50,14 @@
 
   .menu {
     width: calc(var(--font-size-default) * 2);
-
   }
+
+}
+
+.m_active {
+  z-index: 300;
   
-  .m_active {
+  .menu {
     margin-left: auto;
   }
 }

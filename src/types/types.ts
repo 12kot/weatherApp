@@ -3,8 +3,9 @@ export type themeType = "dark" | "system" | "light";
 export interface appType {
   userInfo: userInfoType;
   weather: {
+    isLoading: boolean;
     currentWeather: weatherType;
-    searchList: string[];
+    searchList: { name: string; region: string }[];
   };
   menuActive: boolean;
 }
@@ -14,7 +15,7 @@ export interface userInfoType {
   userCity: string;
   userCountry: string;
   regionId: number;
-  citiesNearby: string[];
+  citiesNearby: { name: string; region: string }[];
 }
 
 export interface weatherType {

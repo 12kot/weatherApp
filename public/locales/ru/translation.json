@@ -34,5 +34,17 @@
     "Aug": "Авг"
   },
 
-  "menu": { "another_location": "Другая локация" }
+  "menu": {
+    "another_location": "Другая локация",
+    "weather_details": "Подробности погоды",
+    "cloudy": "Облачность",
+    "humidity": "Влажность",
+    "wind": "Ветер",
+    "rain": "Дождь"
+  },
+
+  "weather": {
+    "km/h": "км/ч",
+    "mm": "мм"
+  }
 }

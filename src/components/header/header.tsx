@@ -72,7 +72,7 @@ const Header = (): ReactElement => {
   };
 
   return (
-    <header className={`${styles.container} ${head && styles.active}`}>
+    <header className={`${styles.container} ${head && styles.active} ${menuActive && styles.m_active}`}>
       <p className={styles.logo}>LOGO</p>
       {!menuActive && (
         <span className={styles.page}>
@@ -118,7 +118,7 @@ const Header = (): ReactElement => {
 
       {menu && (
         <span
-          className={`${styles.menu} ${menuActive && styles.m_active}`}
+          className={`${styles.menu}`}
           onClick={handleMenu}
         >
           <MenuSVG />

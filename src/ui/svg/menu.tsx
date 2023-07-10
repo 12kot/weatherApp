@@ -26,7 +26,7 @@ const MenuSVG = (): ReactElement => {
           begin="reverse.begin"
         />
       </path>
-      <rect width="10" height="10" stroke="none">
+      {/* <rect width="10" height="10" stroke="none">
         <animate dur="2s" id="reverse" attributeName="width" begin="click" />
       </rect>
       <rect width="10" height="10" stroke="none">
@@ -45,7 +45,7 @@ const MenuSVG = (): ReactElement => {
           fill="freeze"
           begin="reverse.begin"
         />
-      </rect>
+      </rect> */}
     </svg>
   );
 };

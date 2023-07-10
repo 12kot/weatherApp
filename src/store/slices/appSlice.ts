@@ -6,6 +6,7 @@ import { appType, searchType, weatherType } from "types/types";
 const initialState: appType = {
   userInfo: initialUser,
   weather: {
+    isLoading: false,
     currentWeather: initialWeather,
     searchList: [],
   },
@@ -68,7 +69,7 @@ export const getRegionIdByIp = createAsyncThunk<number, { ip: string }>(
 );
 
 export const getCitiesNearby = createAsyncThunk<
-  string[],
+  {name: string, region: string}[],
   void,
   { state: RootState }
 >("app/getCitiesNearby", async (props, { rejectWithValue, getState }) => {
@@ -85,8 +86,15 @@ export const getCitiesNearby = createAsyncThunk<
   );
 
   if (response.ok) {
-    const data: {edges: []} = await response.json();
-    return data.edges.map((item: { node: { name: string } }) => item.node.name);
+    const data: { edges: [] } = await response.json();
+    return data.edges.map(
+      (item: { node: { name: string; parentRegions: { name: string }[] } }) => {
+        return {
+          name: item.node.name,
+          region: item.node.parentRegions[1].name,
+        };
+      }
+    );
   }
 
   return rejectWithValue("");
@@ -124,20 +132,22 @@ export const fetchWeather = createAsyncThunk<
   }
 });
 
-export const searchCity = createAsyncThunk<string[], { search: string }>(
-  "app/searchCity",
-  async (props, { rejectWithValue }) => {
-    const response = await fetch(
-      `https://api.weatherapi.com/v1/search.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${props.search}`
-    );
+export const searchCity = createAsyncThunk<
+  { name: string; region: string }[],
+  { search: string }
+>("app/searchCity", async (props, { rejectWithValue }) => {
+  const response = await fetch(
+    `https://api.weatherapi.com/v1/search.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${props.search}`
+  );
 
-    if (response.ok) {
-      const data: searchType[] = await response.json();
+  if (response.ok) {
+    const data: searchType[] = await response.json();
 
-      return data.map((item) => item.name);
-    } else return rejectWithValue("");
-  }
-);
+    return data.map((item: { name: string; region: string }) => {
+      return { name: item.name, region: item.region };
+    });
+  } else return rejectWithValue("");
+});
 
 const appSlice = createSlice({
   name: "app",
@@ -165,11 +175,16 @@ const appSlice = createSlice({
         state.weather.currentWeather = { ...initialWeather };
       })
 
+      .addCase(searchCity.pending, (state) => {
+        state.weather.isLoading = true;
+      })
       .addCase(searchCity.fulfilled, (state, action) => {
         state.weather.searchList = action.payload;
+        state.weather.isLoading = false;
       })
       .addCase(searchCity.rejected, (state) => {
         state.weather.searchList = [];
+        state.weather.isLoading = false;
       })
 
       .addCase(getRegionIdByIp.fulfilled, (state, action) => {
@@ -185,9 +200,7 @@ const appSlice = createSlice({
       })
       .addCase(getCitiesNearby.rejected, (state) => {
         state.userInfo.regionId = 628035;
-      })
-      
-      ;
+      });
   },
 });
 
