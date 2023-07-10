@@ -41,7 +41,7 @@
     "humidity": "Humidity",
     "wind": "Wind",
     "rain": "Rain",
-    "feelslike_c": "Feels like",
+    "feelslike": "Feels like",
     "wind_dir": "Wind direction",
     "gust": "Wind gust"
   },
