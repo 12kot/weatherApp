@@ -40,7 +40,10 @@
     "cloudy": "Cloudy",
     "humidity": "Humidity",
     "wind": "Wind",
-    "rain": "Rain"
+    "rain": "Rain",
+    "feelslike_c": "Feels like",
+    "wind_dir": "Wind direction",
+    "gust": "Wind gust"
   },
 
   "weather": {

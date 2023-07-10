@@ -20,7 +20,7 @@ const Menu = (): ReactElement => {
     (state) => state.app.userInfo.citiesNearby
   );
 
-  const { wind_kph, humidity, cloud, precip_mm } = useAppSelector(
+  const { wind_kph, humidity, cloud, precip_mm, feelslike_c, wind_dir, gust_kph } = useAppSelector(
     (state) => state.app.weather.currentWeather.current
   );
 
@@ -73,20 +73,32 @@ const Menu = (): ReactElement => {
         <h4>{t("menu.weather_details")}</h4>
         <div className={styles.details_items}>
           <span className={styles.d_item}>
-            <p className={styles.key}>{t("menu.cloudy")}</p>
-            <p className={styles.value}>{cloud}%</p>
+            <p className={styles.key}>{t("menu.feelslike")}</p>
+            <p className={styles.value}>{feelslike_c}°</p>
           </span>
           <span className={styles.d_item}>
-            <p className={styles.key}>{t("menu.humidity")}</p>
-            <p className={styles.value}>{humidity}%</p>
+            <p className={styles.key}>{t("menu.gust")}</p>
+            <p className={styles.value}>{gust_kph + t("weather.km/h")}</p>
           </span>
           <span className={styles.d_item}>
             <p className={styles.key}>{t("menu.wind")}</p>
             <p className={styles.value}>{wind_kph + t("weather.km/h")}</p>
           </span>
           <span className={styles.d_item}>
+            <p className={styles.key}>{t("menu.wind_dir")}</p>
+            <p className={styles.value}>{wind_dir}</p>
+          </span>
+          <span className={styles.d_item}>
+            <p className={styles.key}>{t("menu.humidity")}</p>
+            <p className={styles.value}>{humidity}%</p>
+          </span>
+          <span className={styles.d_item}>
             <p className={styles.key}>{t("menu.rain")}</p>
             <p className={styles.value}>{precip_mm + t("weather.mm")}</p>
+          </span>
+          <span className={styles.d_item}>
+            <p className={styles.key}>{t("menu.cloudy")}</p>
+            <p className={styles.value}>{cloud}%</p>
           </span>
         </div>
       </div>
