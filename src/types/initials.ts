@@ -4,6 +4,7 @@ export const initialUser: userInfoType = {
   userIP: "178.168.186.222",
   userCity: "Hrodna",
   userCountry: "BY",
+  location: "53.6884,23.8258",
   regionId: 628035,
   citiesNearby: [],
 };

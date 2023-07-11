@@ -14,6 +14,7 @@ export interface userInfoType {
   userIP: string;
   userCity: string;
   userCountry: string;
+  location: string;
   regionId: number;
   citiesNearby: { name: string; region: string }[];
 }

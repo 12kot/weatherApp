@@ -18,6 +18,7 @@ export const getUserIP = createAsyncThunk<
     userIP: string;
     userCity: string;
     userCountry: string;
+    location: string;
   },
   void,
   { state: RootState }
@@ -32,7 +33,7 @@ export const getUserIP = createAsyncThunk<
   if (response.ok) {
     const data = await response.json();
 
-    dispatch(fetchWeather({ city: data.city }));
+    dispatch(fetchWeather({ city: data.loc }));
     await dispatch(getRegionIdByIp({ ip: data.ip }));
     dispatch(getCitiesNearby());
 
@@ -40,6 +41,7 @@ export const getUserIP = createAsyncThunk<
       userIP: data.ip,
       userCity: data.city,
       userCountry: data.country,
+      location: data.loc,
     };
   } else {
     return rejectWithValue("");
@@ -106,17 +108,14 @@ export const fetchWeather = createAsyncThunk<
   { state: RootState }
 >("app/fetchWeather", async (props, { getState, rejectWithValue }) => {
   try {
-    const city =
-      props.city !== null ? props.city : getState().app.userInfo.userCity;
-
     let response = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${city}&aqi=yes`
+      `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${props.city}&aqi=yes`
     );
 
     if (!response.ok) {
-      const ip = getState().app.userInfo.userIP;
+      const loc = getState().app.userInfo.location;
       response = await fetch(
-        `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${ip}&aqi=yes`
+        `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${loc}&aqi=yes`
       );
     }
 
@@ -163,6 +162,7 @@ const appSlice = createSlice({
         state.userInfo.userIP = action.payload.userIP;
         state.userInfo.userCity = action.payload.userCity;
         state.userInfo.userCountry = action.payload.userCountry;
+        state.userInfo.location = action.payload.location;
       })
       .addCase(getUserIP.rejected, (state) => {
         state.userInfo = { ...initialUser };
