@@ -17,10 +17,10 @@
 
   --menu-background: linear-gradient(
     135deg,
-    rgba(83, 83, 83, 0.2),
-    rgba(255, 255, 255, 0)
+    rgba(91, 104, 215, 0.4),
+      rgba(159, 172, 199, 0.1)
   );
-  --menu-border: rgba(255, 255, 255, 0.34);
+  --menu-border: rgba(163, 169, 217, 0.34);
   --menu-search-btn: rgba(255, 255, 255, 0.2);
 
   @media screen and (max-width: 1170px) {
@@ -32,8 +32,8 @@
     
     --menu-background: linear-gradient(
       135deg,
-      rgba(110, 110, 110, 0.7),
-      rgba(133, 133, 133, 0.3)
+      rgba(63, 129, 228, 0.65),
+      rgba(72, 133, 208, 0.4)
     );
   }
 
