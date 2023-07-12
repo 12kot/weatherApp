@@ -34,8 +34,7 @@ export const getUserIP = createAsyncThunk<
     const data = await response.json();
 
     dispatch(fetchWeather({ city: data.loc }));
-    await dispatch(getRegionIdByIp({ ip: data.ip }));
-    dispatch(getCitiesNearby());
+    dispatch(getCitiesNearby({ip: data.ip}));
 
     return {
       userIP: data.ip,
@@ -48,37 +47,34 @@ export const getUserIP = createAsyncThunk<
   }
 });
 
-export const getRegionIdByIp = createAsyncThunk<number, { ip: string }>(
-  "app/getRegionIdByIp",
-  async (props, { rejectWithValue }) => {
-    const response = await fetch(
-      `https://data-api.oxilor.com/rest/network?ip=${props.ip}`,
-      {
-        mode: "cors",
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_OXELOR_GET_CITIES}`,
-        },
-      }
-    );
-
-    if (response.ok) {
-      const data = await response.json();
-      return data.region.parentRegions[0].id;
+const getRegionIdByIp = async (props: { ip: string }): Promise<{name: string, id: number}[]> => {
+  const response = await fetch(
+    `https://data-api.oxilor.com/rest/network?ip=${props.ip}`,
+    {
+      mode: "cors",
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_OXELOR_GET_CITIES}`,
+      },
     }
+  );
 
-    return rejectWithValue("");
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data)
+    return data.region.parentRegions;
   }
-);
+
+  return [];
+};
 
 export const getCitiesNearby = createAsyncThunk<
-  {name: string, region: string}[],
-  void,
+  { name: string; region: string }[],
+  { ip: string },
   { state: RootState }
->("app/getCitiesNearby", async (props, { rejectWithValue, getState }) => {
+>("app/getCitiesNearby", async (props, { rejectWithValue }) => {
+  const regions = await getRegionIdByIp({ip: props.ip});
   const response = await fetch(
-    `https://data-api.oxilor.com/rest/child-regions?parentId=${
-      getState().app.userInfo.regionId
-    }`,
+    `https://data-api.oxilor.com/rest/child-regions?parentId=${regions[0].id}`,
     {
       mode: "cors",
       headers: {
@@ -90,10 +86,10 @@ export const getCitiesNearby = createAsyncThunk<
   if (response.ok) {
     const data: { edges: [] } = await response.json();
     return data.edges.map(
-      (item: { node: { name: string; parentRegions: { name: string }[] } }) => {
+      (item: { node: { name: string, parentRegions: { id: number, name: string }[] } }) => {
         return {
           name: item.node.name,
-          region: item.node.parentRegions[1].name,
+          region: item.node.parentRegions[1]?.name ? item.node.parentRegions[1].name : item.node.parentRegions[0].name,
         };
       }
     );
@@ -187,12 +183,12 @@ const appSlice = createSlice({
         state.weather.isLoading = false;
       })
 
-      .addCase(getRegionIdByIp.fulfilled, (state, action) => {
-        state.userInfo.regionId = action.payload;
-      })
-      .addCase(getRegionIdByIp.rejected, (state) => {
-        state.userInfo.regionId = 628035;
-      })
+      // .addCase(getRegionIdByIp.fulfilled, (state, action) => {
+      //   state.userInfo.regionId = action.payload;
+      // })
+      // .addCase(getRegionIdByIp.rejected, (state) => {
+      //   state.userInfo.regionId = 628035;
+      // })
 
       .addCase(getCitiesNearby.fulfilled, (state, action) => {
         state.userInfo.citiesNearby = action.payload;
