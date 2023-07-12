@@ -5,9 +5,18 @@ export interface appType {
   weather: {
     isLoading: boolean;
     currentWeather: weatherType;
-    searchList: { name: string; region: string }[];
+    searchList: cityType[];
   };
   menuActive: boolean;
+}
+
+export interface cityType {
+  name: string;
+  region: string;
+  coords: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
 export interface userInfoType {
@@ -16,7 +25,7 @@ export interface userInfoType {
   userCountry: string;
   location: string;
   regionId: number;
-  citiesNearby: { name: string; region: string }[];
+  citiesNearby: cityType[];
 }
 
 export interface weatherType {

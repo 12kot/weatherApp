@@ -49,5 +49,10 @@
   "weather": {
     "km/h": "km/h",
     "mm": "mm"
+  },
+
+  "search": {
+    "head": "Find out the detailed weather forecast",
+    "inp": "There will be a search that will redirect to another page"
   }
 }

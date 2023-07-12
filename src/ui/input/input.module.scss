@@ -11,10 +11,10 @@
   &::placeholder {
     color: var(--input-border-bottom);
   }
-}
 
-.input_box:focus {
-  border-color: var(--input-border-bottom-active);
-  outline: none;
+  &:focus {
+    border-color: var(--input-border-bottom-active);
+    outline: none;
+  }
 }
 

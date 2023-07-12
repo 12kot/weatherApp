@@ -1,3 +1,39 @@
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+
 .container {
-    height: 100vh;
+  height: 100vh;
+
+  padding: var(--header-heigth-default) 0;
+  flex-direction: column;
+  @extend .flex;
+
+  .search {
+    padding: 0 var(--page-margin-left);
+    text-align: center;
+
+    h1 {
+      font-size: var(--header-logo-size);
+    }
+
+    p {
+      font-size: var(--font-size-default);
+    }
+  }
+
+  .carousel {
+    margin: auto 0;
+
+    row-gap: var(--search-padding);
+    flex-direction: column;
+    @extend .flex;
+
+    .carousel_item {
+      overflow: hidden;
+
+      @extend .flex;
+    }
+  }
 }

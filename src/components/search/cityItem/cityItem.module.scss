@@ -1,0 +1,22 @@
+.container {
+  font-size: var(--font-size-default);
+  width: fit-content;
+
+  margin: 0 calc(var(--search-padding) / 2);
+  padding: var(--menu-padding-item) var(--search-padding);
+
+  border: 1px solid var(--menu-border);
+  border-radius: var(--border-radius);
+
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: var(--transition-default);
+
+  &:hover {
+    background-color: var(--focus-color);
+  }
+
+  &:active {
+    background-color: var(--focus-color);
+  }
+}

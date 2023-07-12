@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "store";
 import { initialUser, initialWeather } from "types/initials";
-import { appType, searchType, weatherType } from "types/types";
+import { appType, cityType, searchType, weatherType } from "types/types";
 
 const initialState: appType = {
   userInfo: initialUser,
@@ -33,8 +33,8 @@ export const getUserIP = createAsyncThunk<
   if (response.ok) {
     const data = await response.json();
 
-    dispatch(fetchWeather({ city: data.loc }));
-    dispatch(getCitiesNearby({ip: data.ip}));
+    dispatch(fetchWeather({ info: data.loc }));
+    dispatch(getCitiesNearby({ ip: data.ip }));
 
     return {
       userIP: data.ip,
@@ -47,7 +47,9 @@ export const getUserIP = createAsyncThunk<
   }
 });
 
-const getRegionIdByIp = async (props: { ip: string }): Promise<{name: string, id: number}[]> => {
+const getRegionIdByIp = async (props: {
+  ip: string;
+}): Promise<{ name: string; id: number }> => {
   const response = await fetch(
     `https://data-api.oxilor.com/rest/network?ip=${props.ip}`,
     {
@@ -59,22 +61,25 @@ const getRegionIdByIp = async (props: { ip: string }): Promise<{name: string, id
   );
 
   if (response.ok) {
-    const data = await response.json();
-    console.log(data)
-    return data.region.parentRegions;
+    const data: {region: {type: string, name: string, id: number, parentRegions: {name: string, id: number}[]}} = await response.json();
+
+    if (data.region.type === "country")
+      return { name: data.region.name, id: data.region.id };
+
+    return data.region.parentRegions[0];
   }
 
-  return [];
+  return { name: "Grodno", id: 627904 };
 };
 
 export const getCitiesNearby = createAsyncThunk<
-  { name: string; region: string }[],
+  cityType[],
   { ip: string },
   { state: RootState }
 >("app/getCitiesNearby", async (props, { rejectWithValue }) => {
-  const regions = await getRegionIdByIp({ip: props.ip});
+  const region = await getRegionIdByIp({ ip: props.ip });
   const response = await fetch(
-    `https://data-api.oxilor.com/rest/child-regions?parentId=${regions[0].id}`,
+    `https://data-api.oxilor.com/rest/child-regions?parentId=${region.id}&first=100`,
     {
       mode: "cors",
       headers: {
@@ -85,11 +90,23 @@ export const getCitiesNearby = createAsyncThunk<
 
   if (response.ok) {
     const data: { edges: [] } = await response.json();
+
     return data.edges.map(
-      (item: { node: { name: string, parentRegions: { id: number, name: string }[] } }) => {
+      (item: {
+        node: {
+          name: string;
+          latitude: number;
+          longitude: number;
+          parentRegions: { id: number; name: string }[];
+        };
+      }) => {
         return {
           name: item.node.name,
-          region: item.node.parentRegions[1]?.name ? item.node.parentRegions[1].name : item.node.parentRegions[0].name,
+          region: item.node.parentRegions[0]?.name || "",
+          coords: {
+            latitude: item.node.latitude,
+            longitude: item.node.longitude,
+          },
         };
       }
     );
@@ -100,49 +117,59 @@ export const getCitiesNearby = createAsyncThunk<
 
 export const fetchWeather = createAsyncThunk<
   weatherType,
-  { city: string | null },
+  { info: string },
   { state: RootState }
->("app/fetchWeather", async (props, { getState, rejectWithValue }) => {
-  try {
-    let response = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${props.city}&aqi=yes`
-    );
-
-    if (!response.ok) {
-      const loc = getState().app.userInfo.location;
-      response = await fetch(
-        `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${loc}&aqi=yes`
-      );
-    }
-
-    if (response.ok) {
-      const data: weatherType = await response.json();
-
-      return data;
-    } else {
-      return rejectWithValue("weather response");
-    }
-  } catch {
-    return rejectWithValue("weather catch");
-  }
-});
-
-export const searchCity = createAsyncThunk<
-  { name: string; region: string }[],
-  { search: string }
->("app/searchCity", async (props, { rejectWithValue }) => {
-  const response = await fetch(
-    `https://api.weatherapi.com/v1/search.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${props.search}`
+  >("app/fetchWeather", async (props, { getState, rejectWithValue }) => {
+  let response = await fetch(
+    `https://api.weatherapi.com/v1/current.json?key=${
+      process.env.REACT_APP_WEATHER_KEY
+    }&q=${props.info}&lang=${localStorage.getItem("i18nextLng")}&aqi=yes`
   );
 
-  if (response.ok) {
-    const data: searchType[] = await response.json();
+  if (!response.ok) {
+    console.log("Не нашли такой город");
 
-    return data.map((item: { name: string; region: string }) => {
-      return { name: item.name, region: item.region };
-    });
-  } else return rejectWithValue("");
+    const loc = getState().app.userInfo.location;
+    response = await fetch(
+      `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${loc}&aqi=yes`
+    );
+
+    return rejectWithValue("weather response");
+  }
+  if (response.ok) {
+    const data: weatherType = await response.json();
+
+    return data;
+  }
+
+  return rejectWithValue("weather response");
 });
+
+export const searchCity = createAsyncThunk<cityType[], { search: string }>(
+  "app/searchCity",
+  async (props, { rejectWithValue }) => {
+    const response = await fetch(
+      `https://api.weatherapi.com/v1/search.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${props.search}&lang=${localStorage.getItem("i18nextLng")}`
+    );
+
+    if (response.ok) {
+      const data: searchType[] = await response.json();
+
+      return data.map(
+        (item: { name: string; region: string; lat: number; lon: number }) => {
+          return {
+            name: item.name,
+            region: item.region,
+            coords: {
+              latitude: item.lat,
+              longitude: item.lon,
+            },
+          };
+        }
+      );
+    } else return rejectWithValue("");
+  }
+);
 
 const appSlice = createSlice({
   name: "app",
@@ -168,7 +195,7 @@ const appSlice = createSlice({
         state.weather.currentWeather = { ...action.payload };
       })
       .addCase(fetchWeather.rejected, (state) => {
-        state.weather.currentWeather = { ...initialWeather };
+        //state.weather.currentWeather = { ...initialWeather };
       })
 
       .addCase(searchCity.pending, (state) => {
@@ -182,13 +209,6 @@ const appSlice = createSlice({
         state.weather.searchList = [];
         state.weather.isLoading = false;
       })
-
-      // .addCase(getRegionIdByIp.fulfilled, (state, action) => {
-      //   state.userInfo.regionId = action.payload;
-      // })
-      // .addCase(getRegionIdByIp.rejected, (state) => {
-      //   state.userInfo.regionId = 628035;
-      // })
 
       .addCase(getCitiesNearby.fulfilled, (state, action) => {
         state.userInfo.citiesNearby = action.payload;

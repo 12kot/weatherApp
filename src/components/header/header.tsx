@@ -10,13 +10,14 @@ import LngSVG from "ui/svg/lng";
 
 import { themeType } from "types/types";
 import { useAppDispatch, useAppSelector } from "hooks/hooks";
-import { menuHandler } from "store/slices/appSlice";
+import { fetchWeather, menuHandler } from "store/slices/appSlice";
 import MenuSVG from "ui/svg/menu";
 
 const Header = (): ReactElement => {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const menuActive = useAppSelector((state) => state.app.menuActive);
+  const {lat, lon} = useAppSelector((state) => state.app.weather.currentWeather.location);
 
   const [head, setHead] = useState<boolean>(false);
   const [menu, setMenu] = useState<boolean>(window.innerWidth < 1170);
@@ -30,6 +31,8 @@ const Header = (): ReactElement => {
   useEffect(() => {
     if (lng === "default") i18n.changeLanguage(navigator.language);
     else i18n.changeLanguage(lng);
+
+    dispatch(fetchWeather({info: lat + "," + lon}));
   }, [lng, i18n]);
 
   useEffect(() => {

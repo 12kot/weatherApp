@@ -5,6 +5,10 @@
   -ms-overflow-style: none;
 }
 
+.color {
+  color: #fff;
+}
+
 .menu {
   @extend .child2;
   z-index: 200;
