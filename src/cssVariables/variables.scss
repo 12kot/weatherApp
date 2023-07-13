@@ -59,7 +59,7 @@
   --current-day-font-city: 24px;
   --current-day-font-day: 16px;
 
-  --current-day-img-size: 32px;
+  --current-day-img-size: 64px;
 
   --search-padding: 8px;
 
@@ -76,7 +76,7 @@
     --current-day-font-city: 24px;
     --current-day-font-day: 15px;
 
-    --current-day-img-size: 36px;
+    --current-day-img-size: 64px;
   }
 
   @media screen and (max-width: 767px) {
@@ -92,7 +92,7 @@
     --current-day-font-city: 20px;
     --current-day-font-day: 12px;
 
-    --current-day-img-size: 32px;
+    --current-day-img-size: 54px;
   }
 
   @media screen and (max-width: 300px) {
@@ -106,7 +106,7 @@
     --current-day-block-heigth: 32px;
     --current-day-font-city: 14px;
     --current-day-font-day: 12px;
-    --current-day-img-size: 24px;
+    --current-day-img-size: 48px;
   }
 }
 

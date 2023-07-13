@@ -9,69 +9,82 @@
     var(--page-margin-left);
 
   margin-top: auto;
-
   @extend .flex;
-
-  .celsius {
-    font-size: var(--current-day-block-heigth);
-
-    &::after {
-      content: "\B0";
-    }
-  }
 
   .block_info {
     width: 100%;
-    justify-content: space-between;
     @extend .flex;
 
     .block_item {
       font-size: var(--current-day-font-day);
-      margin-top: auto;
     }
 
-    .first {
-      font-size: var(--current-day-font-city);
-
-      margin-top: auto;
-      height: 100%;
-
-      justify-content: center;
-      flex-direction: column;
+    .inf {
       @extend .flex;
+      margin-top: auto;
 
-      @include media(1023px, 73%);
+      .celsius {
+        font-size: var(--current-day-block-heigth);
+        transform: translateY(10px);
+
+        &::after {
+          content: "\B0";
+        }
+
+        @media screen and (max-width: 1023px) {
+          transform: translateY(0px);
+        }
+      }
+
+      .first {
+        font-size: var(--current-day-font-city);
+
+        margin-top: auto;
+
+        justify-content: center;
+        flex-direction: column;
+        @extend .flex;
+      }
+
+      @include media(20230px, 65%);
+      @include media(1023px, 63%);
       @include media(767px, 64%);
       @include media(300px, 60%);
+
+      @media screen and (max-width: 1023px) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     .second {
       word-wrap: break-word;
 
       overflow: hidden;
-      
+
       align-items: center;
       text-align: center;
-      
+
       flex-direction: column;
       @extend .flex;
-      
+
       .img {
-        margin: auto;
-        height: var(--current-day-img-size);
+        margin-top: auto;
         width: var(--current-day-img-size);
       }
-      
-      @include media(1023px, 17%);
+
+      @include media(20230px, 35%);
+      @include media(1023px, 37%);
       @include media(767px, 36%);
       @include media(300px, 40%);
     }
+
+    @media screen and (max-width: 1170px) {
+      justify-content: space-between;
+    }
   }
 
-  @media screen and (max-width: 1023px) {
+  @media screen and (max-width: 1170px) {
     padding: var(--page-margin-bottom) var(--page-margin-left);
-
-    flex-direction: column;
-    align-items: flex-start;
   }
 }
