@@ -47,6 +47,34 @@ export const getUserIP = createAsyncThunk<
   }
 });
 
+const getDivision1 = async (
+  props: {
+    name: string;
+    id: number;
+  }[]
+): Promise<{ name: string; id: number }> => { 
+  for (const parent of props) {
+    const response = await fetch(
+      `https://data-api.oxilor.com/rest/region?id=${parent.id}`,
+      {
+        mode: "cors",
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_OXELOR_GET_CITIES}`,
+        },
+      }
+    );
+
+    if (response.ok) {
+      const data: {type: string, name: string, id: number} = await response.json();
+
+      if (data.type === "division1")
+        return { name: data.name, id: data.id };
+    }
+  }
+
+  return props[0];
+};
+
 const getRegionIdByIp = async (props: {
   ip: string;
 }): Promise<{ name: string; id: number }> => {
@@ -61,12 +89,16 @@ const getRegionIdByIp = async (props: {
   );
 
   if (response.ok) {
-    const data: {region: {type: string, name: string, id: number, parentRegions: {name: string, id: number}[]}} = await response.json();
+    const data: {
+      region: {
+        type: string;
+        name: string;
+        id: number;
+        parentRegions: { name: string; id: number }[];
+      };
+    } = await response.json();
 
-    if (data.region.type === "country")
-      return { name: data.region.name, id: data.region.id };
-
-    return data.region.parentRegions[0];
+    return await getDivision1(data.region.parentRegions);
   }
 
   return { name: "Grodno", id: 627904 };
@@ -78,6 +110,7 @@ export const getCitiesNearby = createAsyncThunk<
   { state: RootState }
 >("app/getCitiesNearby", async (props, { rejectWithValue }) => {
   const region = await getRegionIdByIp({ ip: props.ip });
+
   const response = await fetch(
     `https://data-api.oxilor.com/rest/child-regions?parentId=${region.id}&first=100`,
     {
@@ -119,7 +152,7 @@ export const fetchWeather = createAsyncThunk<
   weatherType,
   { info: string },
   { state: RootState }
-  >("app/fetchWeather", async (props, { getState, rejectWithValue }) => {
+  >("app/fetchWeather", async (props, { getState, rejectWithValue }) => {  
   let response = await fetch(
     `https://api.weatherapi.com/v1/current.json?key=${
       process.env.REACT_APP_WEATHER_KEY
@@ -149,7 +182,9 @@ export const searchCity = createAsyncThunk<cityType[], { search: string }>(
   "app/searchCity",
   async (props, { rejectWithValue }) => {
     const response = await fetch(
-      `https://api.weatherapi.com/v1/search.json?key=${process.env.REACT_APP_WEATHER_KEY}&q=${props.search}&lang=${localStorage.getItem("i18nextLng")}`
+      `https://api.weatherapi.com/v1/search.json?key=${
+        process.env.REACT_APP_WEATHER_KEY
+      }&q=${props.search}&lang=${localStorage.getItem("i18nextLng")}`
     );
 
     if (response.ok) {
