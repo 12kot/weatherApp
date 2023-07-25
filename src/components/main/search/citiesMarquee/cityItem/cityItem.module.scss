@@ -1,6 +1,7 @@
 .container {
   font-size: var(--font-size-default);
   width: fit-content;
+  display: block;
 
   margin: 0 calc(var(--search-padding) / 2);
   padding: var(--menu-padding-item) var(--search-padding);

@@ -45,10 +45,6 @@
       &::-webkit-scrollbar {
         width: 0;
       }
-
-      .item { // ???
-        padding: calc(var(--menu-padding-item) + 1px) 0;
-      }
     }
   }
 }

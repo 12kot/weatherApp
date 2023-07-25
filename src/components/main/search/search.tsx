@@ -28,7 +28,6 @@ const Search = (): ReactElement => {
           {searchCities !== citiesNearby &&
             searchCities.slice(0, 5).map((city) => (
               <span
-                className={styles.item}
                 onClick={() => navigator(city.name)}
                 key={v4()}
               >
