@@ -7,6 +7,7 @@
   height: 100vh;
 
   padding: calc(var(--header-heigth-default) * 2) 0;
+  justify-content: space-around;
   flex-direction: column;
   @extend .flex;
 
@@ -26,31 +27,22 @@
     p {
       font-size: var(--font-size-default);
     }
-
-    .inp {
-      width: 60%;
-
-      @media screen and (min-width: 767px) and (max-width: 1023px) {
-        width: 80%;
-      }
-
-      @media screen and (max-width: 767px) {
-        width: 90%;
-      }
-    }
   }
 
-  .carousel {
-    margin: auto 0;
-
+  .marquee {
     row-gap: var(--search-padding);
+
     flex-direction: column;
     @extend .flex;
 
-    .carousel_item {
-      overflow: hidden;
-
+    .searchMarq {
+      overflow: scroll;
+      justify-content: center;
       @extend .flex;
+
+      &::-webkit-scrollbar {
+        width: 0;
+      }
     }
   }
 }
