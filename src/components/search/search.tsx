@@ -6,6 +6,7 @@ import CityItem from "./cityItem/cityItem";
 import { v4 } from "uuid";
 import { useTranslation } from "react-i18next";
 import { cityType } from "types/types";
+import InputSearch from "ui/inputSearch/inputSearch";
 
 const Search = (): ReactElement => {
   const { t } = useTranslation();
@@ -46,7 +47,9 @@ const Search = (): ReactElement => {
     <div className={styles.container} id="search">
       <div className={styles.search}>
         <h1>{t("search.head")}</h1>
-        <p>{t("search.inp")}</p>
+        <span className={styles.inp}>
+          <InputSearch placeholder={t("search.inp")} />
+        </span>
       </div>
 
       <div className={styles.carousel}>{getMarquees()}</div>

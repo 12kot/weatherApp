@@ -14,12 +14,29 @@
     padding: 0 var(--page-margin-left);
     text-align: center;
 
+    gap: var(--padding-default);
+    flex-direction: column;
+    align-items: center;
+    @extend .flex;
+
     h1 {
       font-size: var(--header-logo-size);
     }
 
     p {
       font-size: var(--font-size-default);
+    }
+
+    .inp {
+      width: 60%;
+
+      @media screen and (min-width: 767px) and (max-width: 1023px) {
+        width: 80%;
+      }
+
+      @media screen and (max-width: 767px) {
+        width: 90%;
+      }
     }
   }
 
