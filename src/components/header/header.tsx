@@ -33,7 +33,7 @@ const Header = (): ReactElement => {
     else i18n.changeLanguage(lng);
 
     dispatch(fetchWeather({info: lat + "," + lon}));
-  }, [lng, i18n]);
+  }, [lng, i18n, dispatch]);
 
   useEffect(() => {
     if (theme === "dark") document.body.setAttribute("dark", "");

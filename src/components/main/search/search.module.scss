@@ -31,12 +31,14 @@
 
   .marquee {
     row-gap: var(--search-padding);
-
+    
     flex-direction: column;
     @extend .flex;
-
+    
     .searchMarq {
-      overflow: auto;
+      flex-wrap: wrap;
+      row-gap: var(--search-padding);
+
       justify-content: center;
       @extend .flex;
 
@@ -44,8 +46,8 @@
         width: 0;
       }
 
-      @media screen and (max-width: 767px) {
-        justify-content: flex-start;
+      .item { //КОСТЫЛЬ
+        padding: calc(var(--menu-padding-item) + 1px) 0;
       }
     }
   }

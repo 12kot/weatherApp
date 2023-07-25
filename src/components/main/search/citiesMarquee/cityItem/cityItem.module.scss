@@ -8,8 +8,6 @@
   border: 1px solid var(--menu-border);
   border-radius: var(--border-radius);
 
-  white-space: nowrap;
-  flex-shrink: 0;
   transition: var(--transition-default);
 
   &:hover {
