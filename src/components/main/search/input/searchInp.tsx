@@ -17,7 +17,7 @@ const SearchInp = (): ReactElement => {
   }, [search, dispatch]);
 
   const handleSearch = (): void => {
-    if (search.length > 3) navigator(search);
+    if (search.length >= 3) navigator(search);
   }
 
   return (
