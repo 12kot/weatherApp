@@ -43,6 +43,8 @@
 }
 
 .searchIcon path {
+  transition: var(--transition-default);
+
   fill: rgb(114, 114, 114);
 }
 

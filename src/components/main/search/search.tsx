@@ -4,13 +4,11 @@ import { useAppSelector } from "hooks/hooks";
 import { useTranslation } from "react-i18next";
 import CitiesMarquee from "./citiesMarquee/citiesMarquee";
 import SearchInp from "./input/searchInp";
-import CityItem from "./citiesMarquee/cityItem/cityItem";
 import { v4 } from "uuid";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Search = (): ReactElement => {
   const { t } = useTranslation();
-  const navigator = useNavigate();
   const searchCities = useAppSelector((state) => state.app.weather.searchList);
   const citiesNearby = useAppSelector(
     (state) => state.app.userInfo.citiesNearby
@@ -27,12 +25,9 @@ const Search = (): ReactElement => {
         <span className={styles.searchMarq}>
           {searchCities !== citiesNearby &&
             searchCities.slice(0, 5).map((city) => (
-              <span
-                onClick={() => navigator(city.name)}
-                key={v4()}
-              >
-                <CityItem city={city} borderColor={"rgb(255, 81, 0)"} />
-              </span>
+              <NavLink className={styles.item} to={city.name} key={v4()}>
+                {city.name}
+              </NavLink>
             ))}
         </span>
 

@@ -1,21 +1,5 @@
-.container {
-  font-size: var(--font-size-default);
-  width: fit-content;
-  display: block;
+@import "../../search.module.scss";
 
-  margin: 0 calc(var(--search-padding) / 2);
-  padding: var(--menu-padding-item) var(--search-padding);
-
+.item {
   border: 1px solid var(--menu-border);
-  border-radius: var(--border-radius);
-
-  transition: var(--transition-default);
-
-  &:hover {
-    background-color: var(--focus-color);
-  }
-
-  &:active {
-    background-color: var(--focus-color);
-  }
 }

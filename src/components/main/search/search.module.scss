@@ -48,3 +48,25 @@
     }
   }
 }
+
+.item {
+  font-size: var(--font-size-default);
+  width: fit-content;
+  display: block;
+
+  margin: 0 calc(var(--search-padding) / 2);
+  padding: var(--menu-padding-item) var(--search-padding);
+
+  border: 1px solid rgb(255, 81, 0);
+  border-radius: var(--border-radius);
+
+  transition: var(--transition-default);
+
+  &:hover {
+    background-color: var(--focus-color);
+  }
+
+  &:active {
+    background-color: var(--focus-color);
+  }
+}
