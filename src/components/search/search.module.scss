@@ -36,7 +36,7 @@
     @extend .flex;
 
     .searchMarq {
-      overflow: scroll;
+      overflow: auto;
       justify-content: center;
       @extend .flex;
 
