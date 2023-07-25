@@ -23,7 +23,7 @@ const Search = (): ReactElement => {
 
       <div className={styles.marquee}>
         <span className={styles.searchMarq}>
-          {searchCities.slice(0, 5).map((city) => <CityItem city={city} borderColor={"rgb(255, 81, 0)"} key={v4()} />)}
+          {searchCities !== citiesNearby && searchCities.slice(0, 5).map((city) => <CityItem city={city} borderColor={"rgb(255, 81, 0)"} key={v4()} />)}
         </span>
         <CitiesMarquee cities={citiesNearby} rows={5} size={25} speed={15} />
       </div>
