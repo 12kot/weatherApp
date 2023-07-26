@@ -1,7 +1,13 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "store";
-import { initialUser, initialWeather } from "types/initials";
-import { appType, cityType, searchType, weatherType } from "types/types";
+import { initialFutureWeather, initialUser, initialWeather } from "types/initials";
+import {
+  appType,
+  cityType,
+  futureWeatherType,
+  searchType,
+  weatherType,
+} from "types/types";
 
 const initialState: appType = {
   userInfo: initialUser,
@@ -10,6 +16,7 @@ const initialState: appType = {
     currentWeather: initialWeather,
     searchList: [],
     searchError: false,
+    futureWeather: initialFutureWeather,
   },
   menuActive: false,
 };
@@ -53,7 +60,7 @@ const getDivision1 = async (
     name: string;
     id: number;
   }[]
-): Promise<{ name: string; id: number }> => { 
+): Promise<{ name: string; id: number }> => {
   for (const parent of props) {
     const response = await fetch(
       `https://data-api.oxilor.com/rest/region?id=${parent.id}`,
@@ -66,10 +73,10 @@ const getDivision1 = async (
     );
 
     if (response.ok) {
-      const data: {type: string, name: string, id: number} = await response.json();
+      const data: { type: string; name: string; id: number } =
+        await response.json();
 
-      if (data.type === "division1")
-        return { name: data.name, id: data.id };
+      if (data.type === "division1") return { name: data.name, id: data.id };
     }
   }
 
@@ -153,7 +160,7 @@ export const fetchWeather = createAsyncThunk<
   weatherType,
   { info: string },
   { state: RootState }
-  >("app/fetchWeather", async (props, { getState, rejectWithValue }) => {  
+>("app/fetchWeather", async (props, { getState, rejectWithValue }) => {
   let response = await fetch(
     `https://api.weatherapi.com/v1/current.json?key=${
       process.env.REACT_APP_WEATHER_KEY
@@ -173,6 +180,30 @@ export const fetchWeather = createAsyncThunk<
   if (response.ok) {
     const data: weatherType = await response.json();
 
+    return data;
+  }
+
+  return rejectWithValue("weather response");
+});
+
+export const fetchFutureWeather = createAsyncThunk<
+  futureWeatherType,
+  { info: string },
+  { state: RootState }
+>("app/fetchFutureWeather", async (props, { getState, rejectWithValue }) => {
+  const days = 10;
+  const response = await fetch(
+    `https://api.weatherapi.com/v1/forecast.json?key=${
+      process.env.REACT_APP_WEATHER_KEY
+    }&q=${props.info}&lang=${localStorage.getItem(
+      "i18nextLng"
+    )}&days=${days}&aqi=no&alerts=no`
+  );
+
+  if (response.ok) {
+    const data: futureWeatherType = await response.json();
+
+    console.log(data);
     return data;
   }
 
@@ -234,12 +265,19 @@ const appSlice = createSlice({
         //state.weather.currentWeather = { ...initialWeather };
       })
 
+      .addCase(fetchFutureWeather.fulfilled, (state, action) => {
+        state.weather.futureWeather = { ...action.payload };
+      })
+      .addCase(fetchFutureWeather.rejected, (state) => {
+        //state.weather.currentWeather = { ...initialWeather };
+      })
+
       .addCase(searchCity.pending, (state) => {
         state.weather.isLoading = true;
       })
       .addCase(searchCity.fulfilled, (state, action) => {
         state.weather.searchList = action.payload;
-        
+
         if (!action.payload.length) state.weather.searchError = true;
         else state.weather.searchError = false;
 

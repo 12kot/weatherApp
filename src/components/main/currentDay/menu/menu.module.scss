@@ -18,7 +18,7 @@
   -webkit-backdrop-filter: blur(10px);
   border-left: 1px solid var(--menu-border);
 
-  padding: 65px 48px 32px;
+  padding: var(--header-heigth-default) 48px 32px;
 
   transition: var(--transition-default);
   justify-content: space-between;

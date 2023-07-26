@@ -1,4 +1,4 @@
-import { userInfoType, weatherType } from "./types";
+import { futureWeatherType, userInfoType, weatherType } from "./types";
 
 export const initialUser: userInfoType = {
   userIP: "178.168.186.222",
@@ -56,5 +56,12 @@ export const initialWeather: weatherType = {
       pm2_5: 0,
       pm10: 0,
     },
+  },
+};
+
+export const initialFutureWeather: futureWeatherType = {
+  ...initialWeather,
+  forecast: {
+    forecastday: [],
   },
 };

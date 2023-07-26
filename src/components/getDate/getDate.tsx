@@ -17,8 +17,8 @@ const GetDate = (props: { time: string }) => {
     date.getFullYear().toString(),
   ];
 
-  const getDay = (): string => {
-    switch (date.getDay()) {
+  const getDay = (index = 0): string => {
+    switch ((date.getDay() + index) % 7) {
       case 1:
         return t("days.monday");
       case 2:

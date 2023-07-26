@@ -22,10 +22,10 @@
 .child2 {
   grid-area: 1 / 6 / 6 / 8;
 
-   @media screen and (max-width: 767px) {
-     grid-area: 1 / 1 / 6 / 8;
-     display: none;
-   }
+  @media screen and (max-width: 767px) {
+    grid-area: 1 / 1 / 6 / 8;
+    display: none;
+  }
 }
 
 .container {
@@ -76,7 +76,40 @@
       align-items: center;
       justify-content: center;
 
+      flex-direction: row;
+      column-gap: var(--location-info-padding);
       @extend .flex;
+
+      .item {
+        width: fit-content;
+        height: 150px;
+        text-align: center;
+
+        transition: var(--transition-default);
+        
+        padding: var(--padding-default);
+        gap: var(--padding-default);
+        
+        border-radius: 20px;
+        
+        justify-content: center;
+        @extend .flex;
+
+        .temp {
+          &::after {
+            content: "\B0";
+          }
+        }
+
+        
+        &:hover {
+          background-color: var(--focus-color);
+        }
+      }
+
+      .active {
+        border: 1px solid var(--focus-color);
+      }
     }
 
     @extend .child1;
@@ -84,38 +117,49 @@
   }
 
   .asideCont {
+    padding: calc(var(--header-heigth-default) * 1.4) 0 32px;
+
     background-color: var(--background-default);
 
-    justify-content: center;
-    align-items: center;
-
-    row-gap: calc(var(--location-padding) * 2);
     @extend .flex;
     @extend .child2;
 
-    .dayTime {
-      width: 50%;
-      column-gap: var(--location-padding);
-      flex-direction: row;
-      justify-content: space-around;
-      @extend .flex;
+    .items {
+      row-gap: calc(var(--location-padding) * 2);
 
-      transition: var(--transition-default);
-      border-radius: var(--border-radius);
-      padding: calc(var(--location-padding) * 2) 0;
+      align-items: center;
+      overflow: auto;
 
-      &:hover {
-        background-color: var(--focus-color);
+      &::-webkit-scrollbar {
+        width: 0;
       }
 
-      .value {
-        font-weight: bold;
+      @extend .flex;
 
-        &::after {
-          content: "\B0";
-          padding-left: var(--location-padding);
+      .dayTime {
+        width: 75%;
+        //column-gap: var(--location-padding);
+
+        flex-direction: row;
+        justify-content: space-between;
+
+        transition: var(--transition-default);
+        border-radius: var(--border-radius);
+        padding: calc(var(--location-padding) * 3);
+
+        @extend .flex;
+        &:hover {
+          background-color: var(--focus-color);
         }
 
+        .value {
+          font-weight: bold;
+
+          &::after {
+            content: "\B0";
+            padding-left: var(--location-padding);
+          }
+        }
       }
     }
   }

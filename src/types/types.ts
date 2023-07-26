@@ -7,6 +7,7 @@ export interface appType {
     currentWeather: weatherType;
     searchList: cityType[];
     searchError: boolean;
+    futureWeather: futureWeatherType;
   };
   menuActive: boolean;
 }
@@ -77,6 +78,21 @@ export interface weatherType {
       pm10: number;
     };
   };
+}
+
+export interface futureWeatherType extends weatherType {
+  forecast: {
+    forecastday: futureDay[];
+  };
+}
+
+export interface futureDay {
+  date: string;
+  day: {
+    avgtemp_c: number;
+    condition: { text: string };
+  };
+  hour: { time: string; temp_c: number }[];
 }
 
 export interface searchType {
