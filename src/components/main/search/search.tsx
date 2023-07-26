@@ -23,12 +23,17 @@ const Search = (): ReactElement => {
 
       <div className={styles.marquee}>
         <span className={styles.searchMarq}>
-          {searchCities !== citiesNearby &&
+          {searchCities === citiesNearby ? (
+            <p className={styles.item}>{t("search.startInput")}</p>
+          ) : searchCities.length === 0 ? (
+            <p className={styles.item}>{t("search.undefined")}</p>
+          ) : (
             searchCities.slice(0, 5).map((city) => (
               <NavLink className={styles.item} to={city.name} key={v4()}>
                 {city.name}
               </NavLink>
-            ))}
+            ))
+          )}
         </span>
 
         <CitiesMarquee cities={citiesNearby} rows={5} size={25} speed={15} />

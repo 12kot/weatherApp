@@ -53,6 +53,8 @@
 
   "search": {
     "head": "Find out the detailed weather forecast",
-    "inp": "Enter the name of the city"
+    "inp": "Hrodna",
+    "undefined": "No cities found",
+    "startInput": "Start searching for cities"
   }
 }
