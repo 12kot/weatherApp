@@ -34,7 +34,7 @@ export const getUserIP = createAsyncThunk<
   if (response.ok) {
     const data = await response.json();
 
-    dispatch(fetchWeather({ info: data.loc }));
+    //dispatch(fetchWeather({ info: data.loc }));
     dispatch(getCitiesNearby({ ip: data.ip }));
 
     return {

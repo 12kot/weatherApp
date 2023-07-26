@@ -1,31 +1,15 @@
-.flex {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  column-gap: var(--padding-default);
-}
+@import "components/header/header.module.scss";
 
 .container {
-  z-index: 100;
-  transition: var(--transition-default);
+  //position: inherit;
+  justify-content: space-between;
+  color: var(--font-color-default);
 
-  width: 100%;
-  height: var(--header-heigth-default);
-  top: 0;
+  .settings {
+    margin: 0;
 
-  padding: 12px var(--page-margin-left);
-  color: #fff;
-
-  @extend .flex;
-
-  .logo {
-    font-size: var(--header-logo-size);
-    font-weight: bold;
-    letter-spacing: 3px;
-  }
-
-  .choose {
-    margin-left: auto;
-    @extend .flex;
+    @media screen and (max-width: 767px) {
+      display: none;
+    }
   }
 }

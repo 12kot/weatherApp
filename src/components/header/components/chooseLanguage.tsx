@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import Select from "ui/select/select";
 import LngSVG from "ui/svg/lng";
 
-const ChooseLanguage = (): ReactElement => {
+const ChooseLanguage = (props: {isIcon?: boolean}): ReactElement => {
   const { t, i18n } = useTranslation();
   const dispatch = useAppDispatch();
   const { lat, lon } = useAppSelector(

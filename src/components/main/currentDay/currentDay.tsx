@@ -1,59 +1,22 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import styles from "./currentDay.module.scss";
 
 import Information from "./information/information";
-import { useTranslation } from "react-i18next";
 import Menu from "./menu/menu";
+import { useAppDispatch, useAppSelector } from "hooks/hooks";
+import { fetchWeather } from "store/slices/appSlice";
 
 const CurrentDay = (): ReactElement => {
-  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const location = useAppSelector((state) => state.app.userInfo.location)
 
-  const getDay = (day: number): string => {
-    switch (day) {
-      case 1:
-        return t("days.monday");
-      case 2:
-        return t("days.tuesday");
-      case 3:
-        return t("days.wednesday");
-      case 4:
-        return t("days.thursday");
-      case 5:
-        return t("days.friday");
-      case 6:
-        return t("days.saturday");
-      case 0:
-        return t("days.sunday");
-      default:
-        return "";
-    }
-  };
-
-  const getDate = (time: string): string => {
-    const strTime = time.split(" ");
-    let newTime = strTime.join("T");
-
-    if (strTime[1]?.length === 4)
-      newTime = `${strTime[0]}T0${strTime[1]}`
-    
-    const date = new Date(newTime);
-    
-    const [hours, minutes, day, month, year] = [
-      date.getHours() < 10 ? `0${date.getHours()}` : date.getHours(),
-      date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes(),
-      date.getDate(),
-      t(`months.${date.toLocaleString("en", { month: "short" })}`),
-      date.getFullYear().toString().slice(2),
-    ];
-
-    return `${hours}:${minutes} - ${getDay(
-      date.getDay()
-    )}, ${day} ${month} '${year}`;
-  };
+  useEffect(() => {
+    dispatch(fetchWeather({ info: location }));
+  }, [dispatch, location]);
 
   return (
     <div className={styles.container} id="currentDay">
-      <Information getDate={getDate} />
+      <Information />
 
       <Menu />
     </div>

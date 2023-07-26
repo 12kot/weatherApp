@@ -51,7 +51,7 @@ const Header = (): ReactElement => {
       {!menuActive && <PageNavigation headActive={head} />}
 
       {(head || menu) && !menuActive && (
-        <span className={styles.choose}>
+        <span className={styles.settings}>
           <ChooseLanguage />
           <ChooseTheme />
         </span>

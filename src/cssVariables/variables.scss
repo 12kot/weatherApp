@@ -23,6 +23,8 @@
   --menu-border: rgba(163, 169, 217, 0.34);
   --menu-search-btn: rgba(255, 255, 255, 0.2);
 
+  --location-bg: #fbf9f9;
+
   @media screen and (max-width: 1170px) {
     --input-border-bottom: rgba(255, 255, 255, 0.7);
     --input-border-bottom-active: rgba(255, 255, 255, 0.85);
@@ -63,6 +65,12 @@
 
   --search-padding: 8px;
 
+  --location-padding: 4px;
+  --location-info-padding: 48px;
+  --location-font-temp: 109px;
+  --location-font-day: 32px;
+  --location-font-default: 18px;
+
   @media screen and (min-width: 767px) and (max-width: 1023px) {
     --header-logo-size: 24px;
     --font-size-default: 15px;
@@ -77,6 +85,12 @@
     --current-day-font-day: 15px;
 
     --current-day-img-size: 64px;
+
+    --location-padding: 2px;
+    --location-info-padding: 36px;
+    --location-font-temp: 82px;
+    --location-font-day: 18px;
+    --location-font-default: 15px;
   }
 
   @media screen and (max-width: 767px) {
@@ -93,6 +107,12 @@
     --current-day-font-day: 12px;
 
     --current-day-img-size: 54px;
+
+    --location-padding: 2px;
+    --location-info-padding: 24px;
+    --location-font-temp: 58px;
+    --location-font-day: 14px;
+    --location-font-default: 12px;
   }
 
   @media screen and (max-width: 300px) {
@@ -107,6 +127,11 @@
     --current-day-font-city: 14px;
     --current-day-font-day: 12px;
     --current-day-img-size: 48px;
+
+    --location-info-padding: 12px;
+    --location-font-temp: 42px;
+    --location-font-day: 12px;
+    --location-font-default: 10px;
   }
 }
 
@@ -136,4 +161,6 @@
   --menu-search-btn: rgba(67, 67, 67, 0.15);
 
   --background-img: url("../../public/common/nigthSky.jpg") no-repeat;
-}
+
+  --location-bg: #1e1f22;
+}//27292D

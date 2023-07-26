@@ -1,10 +1,9 @@
 import React, { ReactElement } from "react";
 import { useAppSelector } from "hooks/hooks";
 import styles from "./information.module.scss";
+import GetDate from "components/getDate/getDate";
 
-const Information = (props: {
-  getDate: (time: string) => string;
-}): ReactElement => {
+const Information = (): ReactElement => {
   const { name, localtime } = useAppSelector(
     (state) => state.app.weather.currentWeather.location
   );
@@ -15,6 +14,8 @@ const Information = (props: {
     (state) => state.app.weather.currentWeather.current.condition
   );
 
+  const time = GetDate({ time: localtime });
+
   return (
     <div className={styles.information}>
       <div className={styles.block_info}>
@@ -23,7 +24,7 @@ const Information = (props: {
           <p className={styles.celsius}>{temp_c}</p>
           <div className={styles.first}>
             <p>{name}</p>
-            <p className={styles.block_item}>{props.getDate(localtime)}</p>
+            <p className={styles.block_item}>{time.getDate()}</p>
           </div>
         </div>
 

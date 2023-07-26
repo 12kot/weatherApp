@@ -3,8 +3,120 @@
   flex-direction: column;
 }
 
-.container {
+.parent {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
 
-    
-  @extend .flex;
+.child1 {
+  grid-area: 1 / 1 / 6 / 6;
+
+  @media screen and (max-width: 767px) {
+    grid-area: 1 / 1 / 6 / 8;
+  }
+}
+
+.child2 {
+  grid-area: 1 / 6 / 6 / 8;
+
+   @media screen and (max-width: 767px) {
+     grid-area: 1 / 1 / 6 / 8;
+     display: none;
+   }
+}
+
+.container {
+  height: 100vh;
+  font-size: var(--location-font-default);
+
+  @extend .parent;
+
+  .mainCont {
+    background-color: var(--location-bg);
+    padding: var(--page-margin-bottom) 0;
+
+    @extend .flex;
+
+    .info {
+      flex-grow: 3;
+
+      align-items: center;
+      justify-content: center;
+
+      flex-direction: row;
+      column-gap: var(--location-info-padding);
+      @extend .flex;
+
+      .temp {
+        font-size: var(--location-font-temp);
+        font-weight: bold;
+
+        &::after {
+          content: "\B0";
+        }
+      }
+
+      .date {
+        row-gap: var(--location-padding);
+        @extend .flex;
+
+        .day {
+          font-size: var(--location-font-day);
+          font-weight: bold;
+        }
+      }
+    }
+
+    .futureInfo {
+      flex-grow: 1;
+
+      align-items: center;
+      justify-content: center;
+
+      @extend .flex;
+    }
+
+    @extend .child1;
+    @extend .flex;
+  }
+
+  .asideCont {
+    background-color: var(--background-default);
+
+    justify-content: center;
+    align-items: center;
+
+    row-gap: calc(var(--location-padding) * 2);
+    @extend .flex;
+    @extend .child2;
+
+    .dayTime {
+      width: 50%;
+      column-gap: var(--location-padding);
+      flex-direction: row;
+      justify-content: space-around;
+      @extend .flex;
+
+      transition: var(--transition-default);
+      border-radius: var(--border-radius);
+      padding: calc(var(--location-padding) * 2) 0;
+
+      &:hover {
+        background-color: var(--focus-color);
+      }
+
+      .value {
+        font-weight: bold;
+
+        &::after {
+          content: "\B0";
+          padding-left: var(--location-padding);
+        }
+
+      }
+    }
+  }
 }
