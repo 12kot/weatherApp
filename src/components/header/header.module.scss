@@ -19,28 +19,10 @@
 
   @extend .flex;
 
-  a {
-    color: #fff;
-    padding: 5px 7px;
-    border-radius: var(--border-radius);
-
-    &:hover {
-      background-color: #ffffff29;
-    }
-  }
-
   .logo {
     font-size: var(--header-logo-size);
     font-weight: bold;
     letter-spacing: 3px;
-  }
-
-  .page {
-    @extend .flex;
-
-    @media screen and (max-width: 767px) {
-      display: none;
-    }
   }
 
   .choose {
@@ -67,14 +49,6 @@
   background-color: var(--header-color-default);
   border-bottom: 1px solid var(--border-bottom-default);
   color: var(--font-color-default);
-
-  a {
-    color: var(--font-color-default);
-
-    &:hover {
-      background-color: var(--focus-color);
-    }
-  }
 
   .menu {
     color: var(--font-color-default);
