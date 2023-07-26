@@ -36,7 +36,7 @@
 
   .mainCont {
     background-color: var(--location-bg);
-    padding: var(--page-margin-bottom) 0;
+    padding: calc(var(--header-heigth-default) * 2) 0 var(--page-margin-bottom);
 
     @extend .flex;
 
