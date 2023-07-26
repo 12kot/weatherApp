@@ -6,6 +6,7 @@ export interface appType {
     isLoading: boolean;
     currentWeather: weatherType;
     searchList: cityType[];
+    searchError: boolean;
   };
   menuActive: boolean;
 }

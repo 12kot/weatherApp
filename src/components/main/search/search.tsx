@@ -9,7 +9,7 @@ import { NavLink } from "react-router-dom";
 
 const Search = (): ReactElement => {
   const { t } = useTranslation();
-  const searchCities = useAppSelector((state) => state.app.weather.searchList);
+  const {searchList, searchError} = useAppSelector((state) => state.app.weather);
   const citiesNearby = useAppSelector(
     (state) => state.app.userInfo.citiesNearby
   );
@@ -23,12 +23,12 @@ const Search = (): ReactElement => {
 
       <div className={styles.marquee}>
         <span className={styles.searchMarq}>
-          {searchCities === citiesNearby ? (
+          {searchList === citiesNearby ? (
             <p className={styles.item}>{t("search.startInput")}</p>
-          ) : searchCities.length === 0 ? (
+          ) : searchError ? (
             <p className={styles.item}>{t("search.undefined")}</p>
           ) : (
-            searchCities.slice(0, 5).map((city) => (
+            searchList.slice(0, 5).map((city) => (
               <NavLink className={styles.item} to={city.name} key={v4()}>
                 {city.name}
               </NavLink>

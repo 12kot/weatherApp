@@ -9,6 +9,7 @@ const initialState: appType = {
     isLoading: false,
     currentWeather: initialWeather,
     searchList: [],
+    searchError: false,
   },
   menuActive: false,
 };
@@ -238,6 +239,10 @@ const appSlice = createSlice({
       })
       .addCase(searchCity.fulfilled, (state, action) => {
         state.weather.searchList = action.payload;
+        
+        if (!action.payload.length) state.weather.searchError = true;
+        else state.weather.searchError = false;
+
         state.weather.isLoading = false;
       })
       .addCase(searchCity.rejected, (state) => {
