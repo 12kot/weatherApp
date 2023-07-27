@@ -47,11 +47,7 @@ export interface weatherType {
     temp_c: number;
     temp_f: number;
     is_day: number;
-    condition: {
-      text: string;
-      icon: string;
-      code: number;
-    };
+    condition: conditionType;
     wind_mph: number;
     wind_kph: number;
     wind_degree: number;
@@ -90,9 +86,20 @@ export interface futureDay {
   date: string;
   day: {
     avgtemp_c: number;
-    condition: { text: string };
+    condition: conditionType;
   };
-  hour: { time: string; temp_c: number }[];
+
+  hour: {
+    time: string;
+    temp_c: number;
+    condition: conditionType;
+  }[];
+}
+
+interface conditionType {
+  text: string;
+  icon: string;
+  code: number;
 }
 
 export interface searchType {

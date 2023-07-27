@@ -5,7 +5,8 @@ import Header from "./header/header";
 import { useAppDispatch, useAppSelector } from "hooks/hooks";
 import { fetchFutureWeather } from "store/slices/appSlice";
 import GetDate from "components/getDate/getDate";
-import { v4 } from "uuid";
+import MainInfo from "./mainInfo/mainInfo";
+import HourInfo from "./hourInfo/hourInfo";
 
 const Location = (): ReactElement => {
   const { location } = useParams<keyof { location: string }>();
@@ -17,53 +18,24 @@ const Location = (): ReactElement => {
 
   useEffect(() => {
     dispatch(fetchFutureWeather({ info: location as string }));
-  }, [dispatch, location]);
-
-  const getHours = (): ReactElement[] => {
-    return futureWeather.forecast.forecastday[index]?.hour.map((item) => (
-      <section className={styles.dayTime} key={v4()}>
-        <p className={styles.time}>{item.time.split(" ")[1]}</p>
-        <p className={styles.value}>{item.temp_c}</p>
-      </section>
-    ));
-  };
-
-  const handleClick = (i: number) => {
-    setIndex(i);
-  }
-
-  const getDays = (): ReactElement[] => {
-    return futureWeather.forecast.forecastday.map((day, i) => (
-      <div className={`${styles.item} ${i === index && styles.active}`} onClick={() => handleClick(i)} key={v4()}>
-        <p className={styles.day}>{day.date.slice(5)}</p>
-        <p className={styles.temp}>{day.day.avgtemp_c}</p>
-      </div>
-    ));
-  };
+  }, [dispatch, location, localStorage.getItem("i18nextLng")]);
 
   return (
     <>
       <Header city={futureWeather.location.name} date={date.getFullDate()} />
       <main className={styles.container}>
-        <article className={styles.mainCont}>
-          <section className={styles.info}>
-            <p className={styles.temp}>
-              {futureWeather.forecast.forecastday[index]?.day.avgtemp_c}
-            </p>
-            <div className={styles.date}>
-              <p>{date.getTime()}</p>
-              <p className={styles.day}>{date.getDay(index)}</p>
-              <p>
-                {futureWeather.forecast.forecastday[index]?.day.condition.text}
-              </p>
-            </div>
-          </section>
+        <MainInfo
+          index={index}
+          setIndex={setIndex}
+          forecastday={futureWeather.forecast.forecastday}
+          time={date.getTime()}
+          day={date.getDay(index)}
+        />
 
-          <section className={styles.futureInfo}>{getDays()}</section>
-        </article>
-        <aside className={styles.asideCont}>
-          <div className={styles.items}>{getHours()}</div>
-        </aside>
+        <HourInfo
+          forecastday={futureWeather.forecast.forecastday}
+          index={index}
+        />
       </main>
     </>
   );

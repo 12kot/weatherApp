@@ -1,0 +1,121 @@
+@import "../location.module.scss";
+
+.mainCont {
+  background-color: var(--location-bg);
+  padding: calc(var(--header-heigth-default) * 2) 0 var(--page-margin-bottom);
+
+  @extend .flex;
+
+  .info {
+    flex-grow: 3;
+    //height: 70%;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: row;
+    column-gap: var(--location-info-padding);
+    @extend .flex;
+
+    .temp {
+      width: fit-content;
+      text-align: center;
+      font-size: var(--location-font-temp);
+      font-weight: bold;
+
+      &::after {
+        content: "\B0";
+      }
+    }
+
+    .date {
+      width: fit-content;
+      row-gap: var(--location-padding);
+      @extend .flex;
+
+      .day {
+        font-size: var(--location-font-day);
+        font-weight: bold;
+      }
+
+      .dateInfo {
+        @extend .flex;
+
+        @media screen and (max-width: 767px) {
+       
+          column-gap: var(--padding-default);
+          justify-content: space-between;
+          flex-direction: row-reverse;
+
+          p {
+            margin: auto 0 0;
+          }
+        }
+      }
+
+      @media screen and (max-width: 767px) {
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    p {
+      width: fit-content;
+    }
+
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+    }
+  }
+
+  .futureInfo {
+    //flex-grow: 1;
+    //height: 30%;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: row;
+    column-gap: var(--location-info-padding);
+    @extend .flex;
+
+    .item {
+      width: fit-content;
+      height: 150px;
+      text-align: center;
+      align-items: center;
+
+      transition: var(--transition-default);
+
+      padding: var(--padding-default);
+      gap: var(--padding-default);
+
+      border-radius: 20px;
+
+      justify-content: center;
+      @extend .flex;
+
+      .temp {
+        &::after {
+          content: "\B0";
+        }
+      }
+
+      &:hover {
+        background-color: var(--focus-color);
+      }
+    }
+
+    img {
+      max-height: 36px;
+      max-width: 36px;
+    }
+
+    .active {
+      border: 1px solid var(--focus-color);
+    }
+  }
+
+  @extend .child1;
+  @extend .flex;
+}
