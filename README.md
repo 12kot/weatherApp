@@ -8,4 +8,4 @@
 
 ## Contacts
 + yakol.nikita@gmail.com
-+ [t.me/kod41](https://t.me/kod41)https://t.me/kod41
++ [t.me/kod41](https://t.me/kod41)
