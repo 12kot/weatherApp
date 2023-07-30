@@ -23,12 +23,16 @@
       font-size: var(--location-font-temp);
       font-weight: bold;
 
+      border-radius: var(--border-radius);
+      
       &::after {
         content: "\B0";
       }
     }
 
     .date {
+      border-radius: var(--border-radius);
+
       width: fit-content;
       row-gap: var(--location-padding);
       @extend .flex;
@@ -78,42 +82,6 @@
     flex-direction: row;
     column-gap: var(--location-info-padding);
     @extend .flex;
-
-    .item {
-      width: fit-content;
-      height: 150px;
-      text-align: center;
-      align-items: center;
-
-      transition: var(--transition-default);
-
-      padding: var(--padding-default);
-      gap: var(--padding-default);
-
-      border-radius: 20px;
-
-      justify-content: center;
-      @extend .flex;
-
-      .temp {
-        &::after {
-          content: "\B0";
-        }
-      }
-
-      &:hover {
-        background-color: var(--focus-color);
-      }
-    }
-
-    img {
-      max-height: 36px;
-      max-width: 36px;
-    }
-
-    .active {
-      border: 1px solid var(--focus-color);
-    }
   }
 
   @extend .child1;

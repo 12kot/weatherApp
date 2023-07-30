@@ -1,0 +1,56 @@
+@import "../../location.module.scss";
+
+.dayTime {
+  flex-shrink: 0;
+  width: 90%;
+  height: 48px;
+  //column-gap: var(--location-padding);
+
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  transition: var(--transition-default);
+  border-radius: var(--border-radius);
+  padding: calc(var(--location-padding) * 3);
+
+  @extend .flex;
+
+  &:hover {
+    background-color: var(--focus-color);
+  }
+
+  .time {
+    width: 35%;
+    text-align: center;
+  }
+
+  img {
+    max-height: 36px;
+  }
+
+  .value {
+    font-weight: bold;
+    width: 35%;
+    text-align: center;
+
+    &::after {
+      content: "\B0";
+      padding-left: var(--location-padding);
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    height: 100%;
+    width: var(--location-future-day-width);
+    flex-direction: column;
+
+    .time {
+      width: fit-content;
+    }
+
+    .value {
+      width: fit-content;
+    }
+  }
+}

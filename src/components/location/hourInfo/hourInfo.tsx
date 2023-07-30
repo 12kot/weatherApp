@@ -2,28 +2,29 @@ import React, { ReactElement } from "react";
 import styles from "./hourInfo.module.scss";
 import { futureDay } from "types/types";
 import { v4 } from "uuid";
+import HourItem from "./hourItem/hourItem";
+import HourItemSkeleton from "./hourItem/hourItemSkeleton";
 
 interface Props {
   forecastday: futureDay[];
   index: number;
+  isFutureLoading: boolean;
 }
 
 const HourInfo = (props: Props): ReactElement => {
+  const getSkeletonHours = (count: number) => {
+    return [...Array(count)].map(() => <HourItemSkeleton />)
+  } 
+
   const getHours = (): ReactElement[] => {
     return props.forecastday[props.index]?.hour.map((item) => (
-      <section className={styles.dayTime} key={v4()}>
-        
-        <p className={styles.time}>{item.time.split(" ")[1]}</p>
-        <img src={item.condition.icon} alt={item.condition.text}></img>
-        <p className={styles.value}>{item.temp_c}</p>
-      
-    </section>
+      <HourItem item={item} key={v4()} />
     ));
   };
 
   return (
     <aside className={styles.asideCont}>
-      <div className={styles.items}>{getHours()}</div>
+      <article className={styles.items}>{props.isFutureLoading ? getSkeletonHours(24) : getHours()}</article>
     </aside>
   );
 };

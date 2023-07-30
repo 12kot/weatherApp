@@ -1,0 +1,41 @@
+@import "../../location.module.scss";
+
+.item {
+  width: var(--location-future-day-width);
+  max-width: 100px;
+  height: var(--location-future-day-height);
+  
+  text-align: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  transition: var(--transition-default);
+
+  padding: var(--padding-default);
+  gap: var(--padding-default);
+
+  border-radius: 20px;
+
+  justify-content: center;
+  @extend .flex;
+
+  .temp {
+    &::after {
+      content: "\B0";
+    }
+  }
+
+  &:hover {
+    background-color: var(--focus-color);
+  }
+}
+
+img {
+  max-height: 36px;
+  max-width: 36px;
+}
+
+.active {
+  border: 1px solid var(--focus-color);
+}

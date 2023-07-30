@@ -71,67 +71,76 @@
   --location-font-day: 32px;
   --location-font-default: 18px;
 
+  --location-future-day-width: 100px;
+  --location-future-day-height: 150px;
+  
   @media screen and (min-width: 767px) and (max-width: 1023px) {
     --header-logo-size: 24px;
     --font-size-default: 15px;
 
     --padding-default: 14px;
-
+    
     --page-margin-left: 5vw;
     --page-margin-bottom: 22px;
-
+    
     --current-day-block-heigth: 36px;
     --current-day-font-city: 24px;
     --current-day-font-day: 15px;
-
+    
     --current-day-img-size: 64px;
-
+    
     --location-padding: 2px;
     --location-info-padding: 36px;
     --location-font-temp: 82px;
     --location-font-day: 18px;
     --location-font-default: 15px;
-  }
 
+    --location-future-day-width: 90px;
+  }
+  
   @media screen and (max-width: 767px) {
     --header-logo-size: 20px;
     --font-size-default: 12px;
-
+    
     --padding-default: 12px;
-
+    
     --page-margin-left: 12px;
     --page-margin-bottom: 12px;
-
+    
     --current-day-block-heigth: 32px;
     --current-day-font-city: 20px;
     --current-day-font-day: 12px;
-
+    
     --current-day-img-size: 54px;
-
+    
     --location-padding: 2px;
     --location-info-padding: 24px;
     --location-font-temp: 58px;
     --location-font-day: 14px;
     --location-font-default: 12px;
-  }
 
+    --location-future-day-width: 70px;
+  }
+  
   @media screen and (max-width: 300px) {
     --font-size-default: 10px;
     --header-logo-size: 14px;
     --padding-default: 8px;
-
+    
     --page-margin-left: 8px;
     --page-margin-bottom: 12px;
-
+    
     --current-day-block-heigth: 32px;
     --current-day-font-city: 14px;
     --current-day-font-day: 12px;
     --current-day-img-size: 48px;
-
+    
     --location-info-padding: 12px;
     --location-font-temp: 42px;
     --location-font-day: 12px;
     --location-font-default: 10px;
+
+    --location-future-day-width: 60px;
   }
 }
 

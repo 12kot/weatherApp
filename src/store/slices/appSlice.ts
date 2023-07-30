@@ -22,7 +22,10 @@ const initialState: appType = {
       searchList: [],
       isSearchLoading: false,
     },
-    futureWeather: initialFutureWeather,
+    futureWeather: {
+      futureWeather: initialFutureWeather,
+      isFutureLoading: false,
+    },
   },
   menuActive: false,
   isAppLoading: false,
@@ -283,10 +286,15 @@ const appSlice = createSlice({
         //state.weather.currentWeather = { ...initialWeather };
       })
 
+      .addCase(fetchFutureWeather.pending, (state, action) => { 
+        state.weather.futureWeather.isFutureLoading = true;
+      })
       .addCase(fetchFutureWeather.fulfilled, (state, action) => {
-        state.weather.futureWeather = { ...action.payload };
+        state.weather.futureWeather.futureWeather = { ...action.payload };
+        state.weather.futureWeather.isFutureLoading = false;
       })
       .addCase(fetchFutureWeather.rejected, (state) => {
+        state.weather.futureWeather.isFutureLoading = false;
         //state.weather.currentWeather = { ...initialWeather };
       })
 

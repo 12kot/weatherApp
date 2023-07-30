@@ -12,7 +12,7 @@ const Location = (): ReactElement => {
   const { location } = useParams<keyof { location: string }>();
   const dispatch = useAppDispatch();
   const [index, setIndex] = useState<number>(0);
-  const { futureWeather } = useAppSelector((state) => state.app.weather);
+  const { futureWeather, isFutureLoading } = useAppSelector((state) => state.app.weather.futureWeather);
 
   const date = GetDate({ time: futureWeather.current.last_updated });
 
@@ -22,7 +22,7 @@ const Location = (): ReactElement => {
 
   return (
     <>
-      <Header city={futureWeather.location.name} date={date.getFullDate()} />
+      <Header city={futureWeather.location.name} date={date.getFullDate()} isFutureLoading={isFutureLoading}/>
       <main className={styles.container}>
         <MainInfo
           index={index}
@@ -30,10 +30,12 @@ const Location = (): ReactElement => {
           forecastday={futureWeather.forecast.forecastday}
           time={date.getTime()}
           day={date.getDay(index)}
+          isFutureLoading={isFutureLoading}
         />
 
         <HourInfo
           forecastday={futureWeather.forecast.forecastday}
+          isFutureLoading={isFutureLoading}
           index={index}
         />
       </main>

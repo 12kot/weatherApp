@@ -3,18 +3,23 @@ import styles from "./header.module.scss";
 import { NavLink } from "react-router-dom";
 import ChooseLanguage from "components/header/components/chooseLanguage";
 import ChooseTheme from "components/header/components/chooseTheme";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   city: string;
   date: string;
+  isFutureLoading: boolean;
 }
 
 const Header = (props: Props): ReactElement => {
+  const { t } = useTranslation();
   return (
     <header className={styles.container}>
-      <NavLink to="/" className={styles.logo}>LOGO</NavLink>
-      <p>{props.date}</p>
-      <p>{props.city}</p>
+      <NavLink to="/" className={styles.logo}>
+        LOGO
+      </NavLink>
+      <p className={`${props.isFutureLoading && styles.skeleton}`}>{props.isFutureLoading ? t("loading.loading") : props.date}</p>
+      <p className={`${props.isFutureLoading && styles.skeleton}`}>{props.isFutureLoading ? t("loading.loading") : props.city}</p>
       <span className={styles.settings}>
         <ChooseLanguage />
         <ChooseTheme />

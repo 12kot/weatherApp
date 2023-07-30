@@ -17,6 +17,7 @@
 }
 
 .item {
+  flex-shrink: 0;
   font-size: var(--font-size-default);
 
   padding: var(--menu-padding-item) 4px;

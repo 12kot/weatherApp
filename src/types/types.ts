@@ -9,7 +9,10 @@ export interface appType {
       searchList: cityType[];
       isSearchLoading: boolean;
     };
-    futureWeather: futureWeatherType;
+    futureWeather: {
+      futureWeather: futureWeatherType;
+      isFutureLoading: boolean;
+    };
   };
   menuActive: boolean;
   isAppLoading: boolean;
@@ -95,11 +98,13 @@ export interface futureDay {
     condition: conditionType;
   };
 
-  hour: {
-    time: string;
-    temp_c: number;
-    condition: conditionType;
-  }[];
+  hour: hourItemType[];
+}
+
+export interface hourItemType {
+  time: string;
+  temp_c: number;
+  condition: conditionType;
 }
 
 interface conditionType {
