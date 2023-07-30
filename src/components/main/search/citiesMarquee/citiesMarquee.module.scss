@@ -1,6 +1,16 @@
+@import "../search.module.scss";
+
 .flex {
   display: flex;
   flex-direction: row;
+}
+
+.item {
+  border: 1px solid var(--menu-border);
+}
+
+.skeleton {
+  width: 125px!important;
 }
 
 .carousel {

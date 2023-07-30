@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import styles from "./search.module.scss";
 import { useAppSelector } from "hooks/hooks";
 import { useTranslation } from "react-i18next";
@@ -9,34 +9,47 @@ import { NavLink } from "react-router-dom";
 
 const Search = (): ReactElement => {
   const { t } = useTranslation();
-  const {searchList, searchError} = useAppSelector((state) => state.app.weather);
-  const citiesNearby = useAppSelector(
+  const [search, setSearch] = useState<string>("");
+  
+  const { searchList, isSearchLoading } = useAppSelector(
+    (state) => state.app.weather.search
+  );
+  const { citiesNearby, isNearbyLoading } = useAppSelector(
     (state) => state.app.userInfo.citiesNearby
   );
+
+  const getSkeletonsItems = (count: number): ReactElement[] => {
+    return [...Array(count)].map(() => (
+      <div className={`${styles.item} ${styles.skeleton}`} key={v4()} />
+    ));
+  };
+
+  const getSearchList = () =>
+    searchList.slice(0, 5).map((city) => (
+      <NavLink className={styles.item} to={city.name} key={v4()}>
+        {city.name}
+      </NavLink>
+    ));
 
   return (
     <div className={styles.container} id="search">
       <div className={styles.search}>
         <h1>{t("search.head")}</h1>
-        <SearchInp />
+        <SearchInp search={search} setSearch={setSearch} canSearch={!searchList.length || isSearchLoading} />
       </div>
 
       <div className={styles.marquee}>
         <span className={styles.searchMarq}>
-          {searchList === citiesNearby ? (
+          {search.length < 3 ? (
             <p className={styles.item}>{t("search.startInput")}</p>
-          ) : searchError ? (
+          ) : !searchList.length ? (
             <p className={styles.item}>{t("search.undefined")}</p>
           ) : (
-            searchList.slice(0, 5).map((city) => (
-              <NavLink className={styles.item} to={city.name} key={v4()}>
-                {city.name}
-              </NavLink>
-            ))
+            isSearchLoading ? getSkeletonsItems(3) : getSearchList()
           )}
         </span>
 
-        <CitiesMarquee cities={citiesNearby} rows={5} size={25} speed={15} />
+        <CitiesMarquee isNearbyLoading={isNearbyLoading} cities={citiesNearby} rows={5} size={25} speed={15} />
       </div>
     </div>
   );

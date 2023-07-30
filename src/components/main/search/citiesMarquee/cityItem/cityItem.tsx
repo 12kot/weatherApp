@@ -4,7 +4,10 @@ import { useAppDispatch } from "hooks/hooks";
 import { fetchWeather } from "store/slices/appSlice";
 import { cityType } from "types/types";
 
-const CityItem = (props: { city: cityType }): ReactElement => {
+const CityItem = (props: {
+  city: cityType;
+
+}): ReactElement => {
   const dispatch = useAppDispatch();
 
   const handler = (): void => {

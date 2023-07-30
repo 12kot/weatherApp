@@ -1,34 +1,36 @@
-import React, { ReactElement, useState, useEffect } from "react";
+import React, { ReactElement, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import InputSearch from "ui/inputSearch/inputSearch";
 import styles from "./searchInp.module.scss";
 import { searchCity } from "store/slices/appSlice";
-import { useAppDispatch, useAppSelector } from "hooks/hooks";
+import { useAppDispatch } from "hooks/hooks";
 import { useNavigate } from "react-router-dom";
 
-const SearchInp = (): ReactElement => {
+const SearchInp = (props: {
+  canSearch: boolean;
+  search: string;
+  setSearch: React.Dispatch<React.SetStateAction<string>>
+}): ReactElement => {
   const { t } = useTranslation();
-  const [search, setSearch] = useState<string>("");
   const dispatch = useAppDispatch();
   const navigator = useNavigate();
-  const searchError = useAppSelector((state) => state.app.weather.searchError)
 
   useEffect(() => {
-    if (search.length >= 3) dispatch(searchCity({ search }));
-  }, [search, dispatch]);
+    if (props.search.length >= 3) dispatch(searchCity({ search: props.search }));
+  }, [props.search, dispatch]);
 
   const handleSearch = (): void => {
-    if (search.length >= 3 && !searchError) navigator(search);
+    if (props.search.length >= 3 && !props.canSearch) navigator(props.search);
   }
 
   return (
     <span className={styles.inp}>
       <InputSearch
         placeholder={t("search.inp")}
-        value={search}
-        setValue={setSearch}
+        value={props.search}
+        setValue={props.setSearch}
         handleClick={handleSearch}
-        isActive={!searchError}
+        isActive={!props.canSearch}
       />
     </span>
   );

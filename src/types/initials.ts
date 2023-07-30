@@ -6,7 +6,10 @@ export const initialUser: userInfoType = {
   userCountry: "BY",
   location: "53.6884,23.8258",
   regionId: 628035,
-  citiesNearby: [],
+  citiesNearby: {
+    citiesNearby: [],
+    isNearbyLoading: false
+  },
 };
 
 export const initialWeather: weatherType = {

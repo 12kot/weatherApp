@@ -9,6 +9,40 @@
   color: #fff;
 }
 
+.skeleton {
+  height: calc(
+    (var(--menu-padding-item) * 2) + var(--font-size-default) +
+      (var(--font-size-default) / 4)
+  )!important;
+}
+
+.item {
+  font-size: var(--font-size-default);
+
+  padding: var(--menu-padding-item) 4px;
+  min-height: fit-content;
+
+  cursor: pointer;
+
+  text-align: start;
+  color: var(--menu-font-color);
+  border: 0;
+  background-color: transparent;
+  border-radius: var(--border-radius);
+
+  transition: var(--transition-default);
+
+  &:hover {
+    color: var(--menu-font-color-active);
+    background-color: var(--focus-color);
+  }
+
+  &:focus {
+    color: var(--menu-font-color-active);
+    background-color: var(--focus-color);
+  }
+}
+
 .menu {
   @extend .child2;
   z-index: 200;
@@ -21,6 +55,7 @@
   padding: var(--header-heigth-default) 48px 32px;
 
   transition: var(--transition-default);
+
   justify-content: space-between;
   flex-direction: column;
   row-gap: var(--menu-padding);
@@ -57,35 +92,15 @@
   }
 
   .items {
-    max-height: 45%;
+    height: 45%;
     overflow-y: scroll;
 
     flex-direction: column;
+    row-gap: calc(var(--menu-padding-item) / 2);
     @extend .flex;
 
     .item {
-      font-size: var(--font-size-default);
-      padding: var(--menu-padding-item) 4px;
-
-      cursor: pointer;
-
-      text-align: start;
-      color: var(--menu-font-color);
-      border: 0;
-      background-color: transparent;
-      border-radius: var(--border-radius);
-
-      transition: var(--transition-default);
-
-      &:hover {
-        color: var(--menu-font-color-active);
-        background-color: var(--focus-color);
-      }
-
-      &:focus {
-        color: var(--menu-font-color-active);
-        background-color: var(--focus-color);
-      }
+      //@extend .item;
     }
 
     &::-webkit-scrollbar {
@@ -98,39 +113,37 @@
     flex-direction: column;
     @extend .flex;
 
-    max-height: 45%;
+    height: 45%;
 
     h4 {
       font-size: var(--font-size-default);
     }
 
     .details_items {
-      max-height: 100%;
+      height: 100%;
       overflow-y: scroll;
 
+      row-gap: calc(var(--menu-padding-item) / 2);
       flex-direction: column;
       @extend .flex;
 
-      .d_item {
-        padding: var(--menu-padding-item) 4px;
-
-        border-radius: var(--border-radius);
-        transition: var(--transition-default);
+      .item {
         justify-content: space-between;
+        //@extend .item;
         @extend .flex;
 
         .key {
-          color: var(--menu-font-color);
+          transition: Var(--transition-default);
+        }
+
+        .value {
+          color: #fff;
         }
 
         &:hover {
-          color: var(--menu-font-color-active) !important;
-          background-color: var(--focus-color);
-        }
-
-        &:focus {
-          color: var(--menu-font-color-active);
-          background-color: var(--focus-color);
+          .key {
+            color: #fff;
+          }
         }
       }
 

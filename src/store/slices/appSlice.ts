@@ -1,6 +1,10 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "store";
-import { initialFutureWeather, initialUser, initialWeather } from "types/initials";
+import {
+  initialFutureWeather,
+  initialUser,
+  initialWeather,
+} from "types/initials";
 import {
   appType,
   cityType,
@@ -12,13 +16,16 @@ import {
 const initialState: appType = {
   userInfo: initialUser,
   weather: {
-    isLoading: false,
+    isWeatherLoading: false,
     currentWeather: initialWeather,
-    searchList: [],
-    searchError: false,
+    search: {
+      searchList: [],
+      isSearchLoading: false,
+    },
     futureWeather: initialFutureWeather,
   },
   menuActive: false,
+  isAppLoading: false,
 };
 
 export const getUserIP = createAsyncThunk<
@@ -248,20 +255,31 @@ const appSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getUserIP.pending, (state, action) => {
+        state.isAppLoading = true;
+      })
       .addCase(getUserIP.fulfilled, (state, action) => {
         state.userInfo.userIP = action.payload.userIP;
         state.userInfo.userCity = action.payload.userCity;
         state.userInfo.userCountry = action.payload.userCountry;
         state.userInfo.location = action.payload.location;
+
+        state.isAppLoading = false;
       })
       .addCase(getUserIP.rejected, (state) => {
         state.userInfo = { ...initialUser };
+        state.isAppLoading = false;
       })
 
+      .addCase(fetchWeather.pending, (state, action) => {
+        state.weather.isWeatherLoading = true;
+      })
       .addCase(fetchWeather.fulfilled, (state, action) => {
         state.weather.currentWeather = { ...action.payload };
+        state.weather.isWeatherLoading = false;
       })
       .addCase(fetchWeather.rejected, (state) => {
+        state.weather.isWeatherLoading = false;
         //state.weather.currentWeather = { ...initialWeather };
       })
 
@@ -273,27 +291,29 @@ const appSlice = createSlice({
       })
 
       .addCase(searchCity.pending, (state) => {
-        state.weather.isLoading = true;
+        state.weather.search.isSearchLoading = true;
       })
       .addCase(searchCity.fulfilled, (state, action) => {
-        state.weather.searchList = action.payload;
+        state.weather.search.searchList = action.payload;
 
-        if (!action.payload.length) state.weather.searchError = true;
-        else state.weather.searchError = false;
-
-        state.weather.isLoading = false;
+        state.weather.search.isSearchLoading = false;
       })
       .addCase(searchCity.rejected, (state) => {
-        state.weather.searchList = [];
-        state.weather.isLoading = false;
+        state.weather.search.searchList = [];
+        state.weather.search.isSearchLoading = false;
       })
 
+      .addCase(getCitiesNearby.pending, (state, action) => {
+        state.userInfo.citiesNearby.isNearbyLoading = true;
+      })
       .addCase(getCitiesNearby.fulfilled, (state, action) => {
-        state.userInfo.citiesNearby = action.payload;
-        state.weather.searchList = action.payload;
+        state.userInfo.citiesNearby.citiesNearby = action.payload;
+        //state.weather.searchList = action.payload;
+        state.userInfo.citiesNearby.isNearbyLoading = false;
       })
       .addCase(getCitiesNearby.rejected, (state) => {
         state.userInfo.regionId = 628035;
+        state.userInfo.citiesNearby.isNearbyLoading = false;
       });
   },
 });

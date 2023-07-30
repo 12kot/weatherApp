@@ -10,9 +10,16 @@ interface Props {
   rows: number;
   size: number;
   speed: number;
+  isNearbyLoading: boolean;
 }
 
 const CitiesMarquee = memo((props: Props): ReactElement => {
+  const getSkeletonMarquee = () => {
+    return [...Array(props.size)].map(() => (
+      <div className={`${styles.item} ${styles.skeleton}`}></div>
+    ));
+  };
+
   const getRandomMarqueeItems = (): ReactElement[] => {
     const elements: cityType[] = [];
 
@@ -36,7 +43,9 @@ const CitiesMarquee = memo((props: Props): ReactElement => {
           speed={!(i % 2) ? props.speed * 2 : props.speed}
           key={v4()}
         >
-          <span className={styles.carousel_item}>{getRandomMarqueeItems()}</span>
+          <span className={styles.carousel_item}>
+            {props.isNearbyLoading ? getSkeletonMarquee() : getRandomMarqueeItems()}
+          </span>
         </Marquee>
       );
     }
@@ -44,12 +53,7 @@ const CitiesMarquee = memo((props: Props): ReactElement => {
     return marquues;
   };
 
-
-  return (
-    <div className={styles.carousel}>
-      {getMarquees()}
-    </div>
-  );
+  return <div className={styles.carousel}>{getMarquees()}</div>;
 });
 
 export default CitiesMarquee;

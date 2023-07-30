@@ -34,6 +34,13 @@
     "Aug": "Aug"
   },
 
+  "loading": {
+    "smile": ":D",
+    "loading": "Loading",
+    "very_soon": "There's not much left",
+    "and_loading": "And here's the loading"
+  },
+
   "menu": {
     "another_location": "Another location",
     "weather_details": "Weather Details",

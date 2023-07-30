@@ -8,6 +8,9 @@ import { fetchWeather } from "store/slices/appSlice";
 
 const CurrentDay = (): ReactElement => {
   const dispatch = useAppDispatch();
+  const isWeatherLoading = useAppSelector(
+    (state) => state.app.weather.isWeatherLoading
+  );
   const location = useAppSelector((state) => state.app.userInfo.location)
 
   useEffect(() => {
@@ -15,11 +18,11 @@ const CurrentDay = (): ReactElement => {
   }, [dispatch, location]);
 
   return (
-    <div className={styles.container} id="currentDay">
-      <Information />
+    <main className={styles.container} id="currentDay">
+      <Information isWeatherLoading={isWeatherLoading} />
 
-      <Menu />
-    </div>
+      <Menu isWeatherLoading={isWeatherLoading} />
+    </main>
   );
 };
 

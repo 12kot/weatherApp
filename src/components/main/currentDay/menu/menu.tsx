@@ -7,16 +7,17 @@ import { useAppDispatch, useAppSelector } from "hooks/hooks";
 import { fetchWeather, menuHandler, searchCity } from "store/slices/appSlice";
 import { v4 } from "uuid";
 
-const Menu = (): ReactElement => {
+const Menu = ({isWeatherLoading}: {isWeatherLoading: boolean}): ReactElement => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const menuActive = useAppSelector((state) => state.app.menuActive);
 
-  const cities = useAppSelector((state) => state.app.weather.searchList);
-  const isLoading = useAppSelector((state) => state.app.weather.isLoading);
+  const { searchList, isSearchLoading } = useAppSelector(
+    (state) => state.app.weather.search
+  );
 
-  const citiesNearby = useAppSelector(
+  const { citiesNearby, isNearbyLoading } = useAppSelector(
     (state) => state.app.userInfo.citiesNearby
   );
 
@@ -36,8 +37,17 @@ const Menu = (): ReactElement => {
     if (search.length >= 3) dispatch(searchCity({ search }));
   }, [search, dispatch]);
 
+  const getSkeletonsItems = (count: number): ReactElement[] => {
+    return [...Array(count)].map(() => (
+      <button className={`${styles.item} ${styles.skeleton}`} key={v4()} />
+    ));
+  };
+
   const getCityList = (): ReactElement[] => {
-    if ((search.length === 0 && cities.length === 1) || cities.length === 0)
+    if (
+      (search.length === 0 && searchList.length === 1) ||
+      searchList.length === 0
+    )
       return citiesNearby.map((city) => (
         <button
           className={styles.item}
@@ -50,9 +60,9 @@ const Menu = (): ReactElement => {
         </button>
       ));
 
-    return cities.map((city) => (
+    return searchList.map((city) => (
       <button
-        className={styles.item}
+        className={`${styles.item}`}
         onClick={() =>
           handleSearch(`${city.coords.latitude},${city.coords.longitude}`)
         }
@@ -75,7 +85,7 @@ const Menu = (): ReactElement => {
     ];
 
     return details.map((item) => (
-      <span className={styles.d_item} key={v4()}>
+      <span className={styles.item} key={v4()}>
         <p className={styles.key}>{item.key}</p>
         <p className={styles.value}>{item.value}</p>
       </span>
@@ -98,22 +108,28 @@ const Menu = (): ReactElement => {
           <Input color={styles.color} value={search} setValue={setSearch} />
         </span>
         <button
-          className={`${styles.search_btn} ${(isLoading || search.length < 3)  && styles.loading}`}
+          className={`${styles.search_btn} ${
+            (isSearchLoading || search.length < 3) && styles.loading
+          }`}
           onClick={() => handleSearch(search)}
-          disabled={isLoading || search.length < 3}
+          disabled={isSearchLoading || search.length < 3}
         >
           <SearchSVG />
         </button>
       </div>
 
-      <div className={styles.items}>{getCityList()}</div>
+      <div className={styles.items}>
+        {isNearbyLoading || isSearchLoading
+          ? getSkeletonsItems(7)
+          : getCityList()}
+      </div>
 
       <hr />
 
       <div className={styles.details}>
         <h4>{t("menu.weather_details")}</h4>
         <div className={styles.details_items}>
-          {getWeatherDetails()}
+          {isWeatherLoading ? getSkeletonsItems(7) : getWeatherDetails()}
         </div>
       </div>
 

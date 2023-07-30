@@ -34,6 +34,13 @@
     "Aug": "Авг"
   },
 
+  "loading": {
+    "smile": ":D",
+    "loading": "Загрузка",
+    "very_soon": "Уже совсем скоро",
+    "and_loading": "И тут загрузка"
+  },
+
   "menu": {
     "another_location": "Другая локация",
     "weather_details": "Подробный прогноз",

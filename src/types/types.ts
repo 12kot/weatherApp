@@ -3,13 +3,16 @@ export type themeType = "dark" | "system" | "light";
 export interface appType {
   userInfo: userInfoType;
   weather: {
-    isLoading: boolean;
+    isWeatherLoading: boolean;
     currentWeather: weatherType;
-    searchList: cityType[];
-    searchError: boolean;
+    search: {
+      searchList: cityType[];
+      isSearchLoading: boolean;
+    };
     futureWeather: futureWeatherType;
   };
   menuActive: boolean;
+  isAppLoading: boolean;
 }
 
 export interface cityType {
@@ -27,7 +30,10 @@ export interface userInfoType {
   userCountry: string;
   location: string;
   regionId: number;
-  citiesNearby: cityType[];
+  citiesNearby: {
+    citiesNearby: cityType[];
+    isNearbyLoading: boolean;
+  };
 }
 
 export interface weatherType {

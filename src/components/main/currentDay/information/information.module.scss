@@ -1,4 +1,5 @@
 @import "../currentDay.module.scss";
+@import "ui/loaders/skeleton.module.scss";
 
 .information {
   @extend .child1;
@@ -27,6 +28,8 @@
         font-size: var(--current-day-block-heigth);
         transform: translateY(10px);
 
+        border-radius: var(--border-radius);
+
         &::after {
           content: "\B0";
         }
@@ -38,6 +41,8 @@
 
       .first {
         font-size: var(--current-day-font-city);
+        
+        border-radius: var(--border-radius);
 
         margin-top: auto;
 
@@ -68,7 +73,12 @@
       flex-direction: column;
       @extend .flex;
 
+      p {
+        border-radius: var(--border-radius);
+      }
+
       .img {
+        border-radius: var(--border-radius);
         margin-top: auto;
         width: var(--current-day-img-size);
       }

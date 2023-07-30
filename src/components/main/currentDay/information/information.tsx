@@ -2,8 +2,14 @@ import React, { ReactElement } from "react";
 import { useAppSelector } from "hooks/hooks";
 import styles from "./information.module.scss";
 import GetDate from "components/getDate/getDate";
+import { useTranslation } from "react-i18next";
 
-const Information = (): ReactElement => {
+const Information = ({
+  isWeatherLoading,
+}: {
+  isWeatherLoading: boolean;
+  }): ReactElement => {
+  const { t } = useTranslation();
   const { name, localtime } = useAppSelector(
     (state) => state.app.weather.currentWeather.location
   );
@@ -17,24 +23,44 @@ const Information = (): ReactElement => {
   const time = GetDate({ time: localtime });
 
   return (
-    <div className={styles.information}>
+    <article className={styles.information}>
       <div className={styles.block_info}>
-
-        <div className={styles.inf}>
-          <p className={styles.celsius}>{temp_c}</p>
-          <div className={styles.first}>
-            <p>{name}</p>
-            <p className={styles.block_item}>{time.getDate()}</p>
+        <section className={styles.inf}>
+          <p
+            className={`${styles.celsius} ${
+              isWeatherLoading && styles.skeleton
+            }`}
+          >
+            {isWeatherLoading ? t("loading.smile") : temp_c}
+          </p>
+          <div className={`${styles.first}`}>
+            <p className={`${isWeatherLoading && styles.skeleton}`}>{isWeatherLoading ? t("loading.loading") : name}</p>
+            <p
+              className={`${styles.block_item} ${
+                isWeatherLoading && styles.skeleton
+              }`}
+            >
+              {isWeatherLoading ? t("loading.very_soon") : time.getDate()}
+            </p>
           </div>
-        </div>
+        </section>
 
-        <div className={styles.second}>
-          <img src={icon} className={styles.img} alt="icon" />
-          <p className={styles.block_item}>{text}</p>
-        </div>
-        
+        <section className={`${styles.second}`}>
+          <img
+            src={icon}
+            className={`${styles.img} ${isWeatherLoading && styles.skeleton}`}
+            alt={text}
+          />
+          <p
+            className={`${styles.block_item} ${
+              isWeatherLoading && styles.skeleton
+            }`}
+          >
+            {isWeatherLoading ? t("loading.and_loading") : text}
+          </p>
+        </section>
       </div>
-    </div>
+    </article>
   );
 };
 
