@@ -39,6 +39,8 @@
     );
   }
 
+  --loader-skeleton-bg:  linear-gradient(-45deg, #cfcfcf55, #f0f0f000, #cfcfcf55, #f0f0f000);
+
   --background-img: url("../../public/common/daySky.jpg") no-repeat;
 
   --header-logo-size: 24px;
@@ -172,4 +174,6 @@
   --background-img: url("../../public/common/nigthSky.jpg") no-repeat;
 
   --location-bg: #1e1f22;
+
+  --loader-skeleton-bg:  linear-gradient(-45deg, #dddddd25, #f0f0f000, #dddddd25, #f0f0f000);
 }//27292D

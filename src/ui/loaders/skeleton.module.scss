@@ -1,5 +1,5 @@
 .skeleton {
-  background: linear-gradient(-45deg, #dddddd25, #f0f0f000, #dddddd25, #f0f0f000);
+  background: var(--loader-skeleton-bg);
   background-size: 400% 400%;
   -webkit-animation: Gradient 2.25s ease infinite;
   -moz-animation: Gradient 2.25s ease infinite;
