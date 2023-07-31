@@ -14,7 +14,7 @@ const ChooseLanguage = (): ReactElement => {
   );
 
   const [lng, setLng] = useState<string>(
-    localStorage.getItem("i18nextLng") as "en" | "ru" | "default"
+    localStorage.getItem("i18nextLng") as "en" | "ru" | "by" | "default"
   );
 
   useEffect(() => {
@@ -34,6 +34,7 @@ const ChooseLanguage = (): ReactElement => {
         { id: "default", svg: LngSVG, text: t("header.default_lng") },
         { id: "ru", svg: LngSVG, text: "Русский" },
         { id: "en", svg: LngSVG, text: "English" },
+        { id: "by", svg: LngSVG, text: "Беларуская" },
       ]}
       value={lng}
       setValue={setLng}
