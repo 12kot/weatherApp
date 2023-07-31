@@ -20,7 +20,7 @@ const SearchInp = (props: {
   }, [props.search, dispatch]);
 
   const handleSearch = (): void => {
-    if (props.search.length >= 3 && !props.canSearch) navigator(props.search);
+    if (props.search.length >= 3 && !props.canSearch) navigator(`loc/${props.search}`);
   }
 
   return (

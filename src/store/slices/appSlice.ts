@@ -25,6 +25,7 @@ const initialState: appType = {
     futureWeather: {
       futureWeather: initialFutureWeather,
       isFutureLoading: false,
+      isError: false
     },
   },
   menuActive: false,
@@ -292,9 +293,11 @@ const appSlice = createSlice({
       .addCase(fetchFutureWeather.fulfilled, (state, action) => {
         state.weather.futureWeather.futureWeather = { ...action.payload };
         state.weather.futureWeather.isFutureLoading = false;
+        state.weather.futureWeather.isError = false;
       })
       .addCase(fetchFutureWeather.rejected, (state) => {
         state.weather.futureWeather.isFutureLoading = false;
+        state.weather.futureWeather.isError = true;
         //state.weather.currentWeather = { ...initialWeather };
       })
 

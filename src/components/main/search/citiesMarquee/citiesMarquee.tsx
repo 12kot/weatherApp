@@ -16,7 +16,7 @@ interface Props {
 const CitiesMarquee = memo((props: Props): ReactElement => {
   const getSkeletonMarquee = () => {
     return [...Array(props.size)].map(() => (
-      <div className={`${styles.item} ${styles.skeleton}`}></div>
+      <div className={`${styles.item} ${styles.skeleton}`} key={v4()}></div>
     ));
   };
 

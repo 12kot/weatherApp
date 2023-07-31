@@ -13,7 +13,7 @@ interface Props {
 
 const HourInfo = (props: Props): ReactElement => {
   const getSkeletonHours = (count: number) => {
-    return [...Array(count)].map(() => <HourItemSkeleton />)
+    return [...Array(count)].map(() => <HourItemSkeleton key={v4()} />)
   } 
 
   const getHours = (): ReactElement[] => {

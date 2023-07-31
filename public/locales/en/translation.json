@@ -10,6 +10,7 @@
     "dark_theme": "Dark",
     "light_theme": "Light"
   },
+
   "days": {
     "monday": "Monday",
     "tuesday": "Tuesday",
@@ -19,6 +20,7 @@
     "saturday": "Saturday",
     "sunday": "Sunday"
   },
+
   "months": {
     "Sep": "Sep",
     "Oct": "Oct",
@@ -39,7 +41,8 @@
     "oops": "Oops...",
     "loading": "Loading",
     "very_soon": "There's not much left",
-    "and_loading": "And here's the loading"
+    "and_loading": "And here's the loading",
+    "pageLoad": "LOOKING OUTSIDE FOR YOU... ONE SEC"
   },
 
   "menu": {

@@ -6,6 +6,7 @@ import { getUserIP } from "store/slices/appSlice";
 import { Route, Routes } from "react-router-dom";
 import Main from "components/main/main";
 import Location from "components/location/location";
+import NotFound from "components/notFound/notFound";
 
 const App = (): ReactElement => {
   const dispatch = useAppDispatch();
@@ -15,15 +16,17 @@ const App = (): ReactElement => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (localStorage.getItem("theme") === "dark") document.body.setAttribute("dark", "");
+    if (localStorage.getItem("theme") === "dark")
+      document.body.setAttribute("dark", "");
     else document.body.removeAttribute("dark");
   }, []);
 
   return (
     <>
       <Routes>
-        <Route path="/*" element={<Main />} />
-        <Route path="/:location" element={<Location />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/404" element={<NotFound />} />
+        <Route path="/loc/:location" element={<Location />} />
       </Routes>
     </>
   );

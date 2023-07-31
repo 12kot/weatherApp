@@ -12,6 +12,7 @@ export interface appType {
     futureWeather: {
       futureWeather: futureWeatherType;
       isFutureLoading: boolean;
+      isError: boolean;
     };
   };
   menuActive: boolean;

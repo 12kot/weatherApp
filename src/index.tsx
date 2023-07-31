@@ -16,7 +16,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <Suspense fallback={<>Loading...</>}>
+        <Suspense fallback={<></>}>
           <App />
         </Suspense>
       </Provider>

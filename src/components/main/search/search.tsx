@@ -24,9 +24,9 @@ const Search = (): ReactElement => {
     ));
   };
 
-  const getSearchList = () =>
+  const getSearchList = (): ReactElement[] =>
     searchList.slice(0, 5).map((city) => (
-      <NavLink className={styles.item} to={city.name} key={v4()}>
+      <NavLink className={styles.item} to={`loc/${city.name}`} key={v4()}>
         {city.name}
       </NavLink>
     ));

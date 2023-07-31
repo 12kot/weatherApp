@@ -7,18 +7,25 @@ import { fetchFutureWeather } from "store/slices/appSlice";
 import GetDate from "components/getDate/getDate";
 import MainInfo from "./mainInfo/mainInfo";
 import HourInfo from "./hourInfo/hourInfo";
+import NotFound from "components/notFound/notFound";
+import PageLoader from "ui/loaders/pageLoader/pageLoader";
 
 const Location = (): ReactElement => {
   const { location } = useParams<keyof { location: string }>();
   const dispatch = useAppDispatch();
   const [index, setIndex] = useState<number>(0);
   const { futureWeather, isFutureLoading } = useAppSelector((state) => state.app.weather.futureWeather);
+  const isFutureError: boolean = useAppSelector((state) => state.app.weather.futureWeather.isError)
 
   const date = GetDate({ time: futureWeather.current.last_updated });
 
   useEffect(() => {
     dispatch(fetchFutureWeather({ info: location as string }));
   }, [dispatch, location, localStorage.getItem("i18nextLng")]);
+
+  return <PageLoader />
+
+  if(isFutureError) return <NotFound />
 
   return (
     <>
