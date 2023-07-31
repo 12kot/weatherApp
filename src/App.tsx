@@ -24,7 +24,7 @@ const App = (): ReactElement => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/*" element={<Main />} />
         <Route path="/404" element={<NotFound />} />
         <Route path="/loc/:location" element={<Location />} />
       </Routes>

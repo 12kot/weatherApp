@@ -32,13 +32,13 @@ const Search = (): ReactElement => {
     ));
 
   return (
-    <div className={styles.container} id="search">
-      <div className={styles.search}>
+    <article className={styles.container} id="search">
+      <section className={styles.search}>
         <h1>{t("search.head")}</h1>
         <SearchInp search={search} setSearch={setSearch} canSearch={!searchList.length || isSearchLoading} />
-      </div>
+      </section>
 
-      <div className={styles.marquee}>
+      <article className={styles.marquee}>
         <span className={styles.searchMarq}>
           {search.length < 3 ? (
             <p className={styles.item}>{t("search.startInput")}</p>
@@ -50,8 +50,8 @@ const Search = (): ReactElement => {
         </span>
 
         <CitiesMarquee isNearbyLoading={isNearbyLoading} cities={citiesNearby} rows={5} size={25} speed={15} />
-      </div>
-    </div>
+      </article>
+    </article>
   );
 };
 

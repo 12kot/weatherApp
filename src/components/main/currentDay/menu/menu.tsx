@@ -102,8 +102,8 @@ const Menu = ({isWeatherLoading}: {isWeatherLoading: boolean}): ReactElement => 
   };
 
   return (
-    <div className={`${menuActive && styles.active} ${styles.menu}`}>
-      <div className={styles.search}>
+    <aside className={`${menuActive && styles.active} ${styles.menu}`}>
+      <section className={styles.search}>
         <span className={styles.inp}>
           <Input color={styles.color} value={search} setValue={setSearch} />
         </span>
@@ -116,25 +116,25 @@ const Menu = ({isWeatherLoading}: {isWeatherLoading: boolean}): ReactElement => 
         >
           <SearchSVG />
         </button>
-      </div>
+      </section>
 
-      <div className={styles.items}>
+      <section className={styles.items}>
         {isNearbyLoading || isSearchLoading
           ? getSkeletonsItems(7)
           : getCityList()}
-      </div>
+      </section>
 
       <hr />
 
-      <div className={styles.details}>
+      <section className={styles.details}>
         <h4>{t("menu.weather_details")}</h4>
         <div className={styles.details_items}>
           {isWeatherLoading ? getSkeletonsItems(7) : getWeatherDetails()}
         </div>
-      </div>
+      </section>
 
       <hr />
-    </div>
+    </aside>
   );
 };
 

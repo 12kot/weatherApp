@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-const GetDate = (props: { time: string }) => {
+const useGetDate = (props: { time: string }) => {
   const { t } = useTranslation();
   const strTime = props.time.split(" ");
   let newTime = strTime.join("T");
@@ -48,4 +48,4 @@ const GetDate = (props: { time: string }) => {
   return { getTime, getDay, getFullDate, getDate };
 };
 
-export default GetDate;
+export default useGetDate;

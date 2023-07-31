@@ -1,7 +1,10 @@
 import React from "react";
 import styles from "./pageLoader.module.scss";
+import { useTranslation } from "react-i18next";
 
 const PageLoader = () => {
+    const { t } = useTranslation();
+
   return (
     <div className={styles.page}>
       <div className={styles.preloader} style={{ opacity: 1 }}>
@@ -105,7 +108,7 @@ const PageLoader = () => {
           <span className={styles.drop}></span>
         </div>
 
-        <div className={styles.text}>LOADING...</div>
+              <div className={styles.text}>{t("loading.pageLoad")}</div>
       </div>
     </div>
   );

@@ -51,16 +51,16 @@ const Header = (): ReactElement => {
       {!menuActive && <PageNavigation headActive={head} />}
 
       {(head || menu) && !menuActive && (
-        <span className={styles.settings}>
+        <section className={styles.settings}>
           <ChooseLanguage />
           <ChooseTheme />
-        </span>
+        </section>
       )}
 
       {menu && (
-        <span className={`${styles.menu}`} onClick={handleMenu}>
+        <section className={`${styles.menu}`} onClick={handleMenu}>
           <MenuSVG />
-        </span>
+        </section>
       )}
     </header>
   );

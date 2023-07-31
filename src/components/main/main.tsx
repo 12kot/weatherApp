@@ -7,12 +7,12 @@ import Header from "components/header/header";
 
 const Main = (): ReactElement => {
   return (
-      <div className={styles.container}>
+      <main className={styles.container}>
       <Header />
       <CurrentDay />
       <Search />
       <About />
-    </div>
+    </main>
   );
 };
 

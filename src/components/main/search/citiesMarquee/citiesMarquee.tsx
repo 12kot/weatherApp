@@ -53,7 +53,7 @@ const CitiesMarquee = memo((props: Props): ReactElement => {
     return marquues;
   };
 
-  return <div className={styles.carousel}>{getMarquees()}</div>;
+  return <section className={styles.carousel}>{getMarquees()}</section>;
 });
 
 export default CitiesMarquee;

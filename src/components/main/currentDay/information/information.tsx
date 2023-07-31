@@ -1,7 +1,7 @@
 import React, { ReactElement } from "react";
 import { useAppSelector } from "hooks/hooks";
 import styles from "./information.module.scss";
-import GetDate from "components/getDate/getDate";
+import GetDate from "hooks/useGetDate";
 import { useTranslation } from "react-i18next";
 
 const Information = ({
@@ -23,8 +23,8 @@ const Information = ({
   const time = GetDate({ time: localtime });
 
   return (
-    <article className={styles.information}>
-      <div className={styles.block_info}>
+    <main className={styles.information}>
+      <article className={styles.block_info}>
         <section className={styles.inf}>
           <p
             className={`${styles.celsius} ${
@@ -59,8 +59,8 @@ const Information = ({
             {isWeatherLoading ? t("loading.and_loading") : text}
           </p>
         </section>
-      </div>
-    </article>
+      </article>
+    </main>
   );
 };
 

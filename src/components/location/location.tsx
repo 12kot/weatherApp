@@ -4,7 +4,7 @@ import styles from "./location.module.scss";
 import Header from "./header/header";
 import { useAppDispatch, useAppSelector } from "hooks/hooks";
 import { fetchFutureWeather } from "store/slices/appSlice";
-import GetDate from "components/getDate/getDate";
+import GetDate from "hooks/useGetDate";
 import MainInfo from "./mainInfo/mainInfo";
 import HourInfo from "./hourInfo/hourInfo";
 import NotFound from "components/notFound/notFound";
@@ -23,9 +23,9 @@ const Location = (): ReactElement => {
     dispatch(fetchFutureWeather({ info: location as string }));
   }, [dispatch, location, localStorage.getItem("i18nextLng")]);
 
-  return <PageLoader />
-
+  if(isFutureLoading) return <PageLoader />
   if(isFutureError) return <NotFound />
+
 
   return (
     <>

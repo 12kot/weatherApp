@@ -20,10 +20,10 @@ const Header = (props: Props): ReactElement => {
       </NavLink>
       <p className={`${props.isFutureLoading && styles.skeleton}`}>{props.isFutureLoading ? t("loading.loading") : props.date}</p>
       <p className={`${props.isFutureLoading && styles.skeleton}`}>{props.isFutureLoading ? t("loading.loading") : props.city}</p>
-      <span className={styles.settings}>
+      <section className={styles.settings}>
         <ChooseLanguage />
         <ChooseTheme />
-      </span>
+      </section>
     </header>
   );
 };

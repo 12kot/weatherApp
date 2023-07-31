@@ -3,9 +3,9 @@ import styles from "./about.module.scss";
 
 const About = () => {
   return (
-    <div className={styles.container} id="about">
+    <article className={styles.container} id="about">
       <h1>МОРСКАЯ ЧЕРЕПАШКА ПО ИМЕНИ НАТАШКА</h1>
-      <div className={styles.content}>
+      <section className={styles.content}>
         <p>
           Это было прошлым летом Я лежала на песке Наслаждалась ярким светом
           Криком чаек в далеке Вдруг из самого из моря На горячий, на песок Чудо
@@ -28,8 +28,8 @@ const About = () => {
           Такая... Крутая... Черепашка По имени Наташка Такая... Крутая...
           Морская
         </p>
-      </div>
-    </div>
+      </section>
+    </article>
   );
 };
 

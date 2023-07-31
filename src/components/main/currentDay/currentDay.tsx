@@ -18,11 +18,11 @@ const CurrentDay = (): ReactElement => {
   }, [dispatch, location]);
 
   return (
-    <main className={styles.container} id="currentDay">
+    <article className={styles.container} id="currentDay">
       <Information isWeatherLoading={isWeatherLoading} />
 
       <Menu isWeatherLoading={isWeatherLoading} />
-    </main>
+    </article>
   );
 };
 
