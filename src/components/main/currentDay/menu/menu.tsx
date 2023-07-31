@@ -7,7 +7,11 @@ import { useAppDispatch, useAppSelector } from "hooks/hooks";
 import { fetchWeather, menuHandler, searchCity } from "store/slices/appSlice";
 import { v4 } from "uuid";
 
-const Menu = ({isWeatherLoading}: {isWeatherLoading: boolean}): ReactElement => {
+const Menu = ({
+  isWeatherLoading,
+}: {
+  isWeatherLoading: boolean;
+}): ReactElement => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
@@ -93,6 +97,8 @@ const Menu = ({isWeatherLoading}: {isWeatherLoading: boolean}): ReactElement => 
   };
 
   const handleSearch = (info: string): void => {
+    if (searchList.length === 0 || search.length < 3) return;
+
     document.body.removeAttribute("no_scroll");
 
     dispatch(fetchWeather({ info }));
@@ -105,14 +111,19 @@ const Menu = ({isWeatherLoading}: {isWeatherLoading: boolean}): ReactElement => 
     <aside className={`${menuActive && styles.active} ${styles.menu}`}>
       <section className={styles.search}>
         <span className={styles.inp}>
-          <Input color={styles.color} value={search} setValue={setSearch} />
+          <Input
+            color={styles.color}
+            value={search}
+            setValue={setSearch}
+            handleClick={handleSearch}
+          />
         </span>
         <button
           className={`${styles.search_btn} ${
-            (isSearchLoading || search.length < 3) && styles.loading
+            (isSearchLoading || search.length < 3 || searchList.length === 0) && styles.loading
           }`}
           onClick={() => handleSearch(search)}
-          disabled={isSearchLoading || search.length < 3}
+          disabled={isSearchLoading || search.length < 3 || searchList.length === 0}
         >
           <SearchSVG />
         </button>
