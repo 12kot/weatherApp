@@ -1,8 +1,10 @@
 import React, { ReactElement } from "react";
+import styles from "./rotate.module.scss"
 
-const SunColorSVG = (): ReactElement => {
+const SunColorSVG = ({animated}: {animated?: boolean}): ReactElement => {
   return (
     <svg
+      className={`${animated && styles.rotate}`}
       viewBox="-3.2 -3.2 38.40 38.40"
       enableBackground="new 0 0 32 32"
       version="1.1"

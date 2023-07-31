@@ -57,7 +57,7 @@ const Header = (): ReactElement => {
         </section>
       )}
 
-      {menu && (
+      {(menu) && (
         <section className={`${styles.menu}`} onClick={handleMenu}>
           <MenuSVG />
         </section>

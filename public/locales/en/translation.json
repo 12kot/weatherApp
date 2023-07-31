@@ -67,5 +67,10 @@
     "inp": "Hrodna",
     "undefined": "No cities found",
     "startInput": "Start searching for cities"
+  },
+
+  "notFound": {
+    "backToHome": "Back to the main page",
+    "title": "Sorry, we couldn't predict the weather in this city"
   }
 }

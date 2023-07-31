@@ -100,9 +100,9 @@
     row-gap: calc(var(--menu-padding-item) / 2);
     @extend .flex;
 
-    .item {
-      //@extend .item;
-    }
+    // .item {
+    //   @extend .item;
+    // }
 
     &::-webkit-scrollbar {
       @extend .scrollbar;
