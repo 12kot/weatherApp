@@ -2,7 +2,7 @@
 @import "ui/loaders/skeleton.module.scss";
 
 .container {
-  //position: inherit;
+  position: absolute;
   justify-content: space-between;
   color: var(--font-color-default);
 

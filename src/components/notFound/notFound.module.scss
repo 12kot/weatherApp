@@ -48,6 +48,8 @@
           padding: var(--menu-padding-item) calc(var(--menu-padding-item) / 1.5);
           border-radius: var(--border-radius);
 
+          border: 1px solid var(--menu-border);
+
           &:hover {
             background-color: var(--focus-color);
           }
