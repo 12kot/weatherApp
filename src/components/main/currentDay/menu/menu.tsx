@@ -97,8 +97,6 @@ const Menu = ({
   };
 
   const handleSearch = (info: string): void => {
-    if (searchList.length === 0 || search.length < 3) return;
-
     document.body.removeAttribute("no_scroll");
 
     dispatch(fetchWeather({ info }));
